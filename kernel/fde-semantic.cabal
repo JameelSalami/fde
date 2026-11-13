@@ -1,0 +1,48 @@
+cabal-version: 3.0
+name: fde-semantic
+version: 0.1.0.0
+build-type: Simple
+
+common strict
+  default-language: GHC2021
+  ghc-options: -Wall -Werror=incomplete-patterns
+
+library
+  import: strict
+  hs-source-dirs: src
+  exposed-modules: FDE.Kernel FDE.History FDE.Wire FDE.Admission FDE.AdmissionWire FDE.Semantic FDE.SemanticWire FDE.Industrial FDE.IndustrialWire FDE.ProductionReport FDE.ProductionReportWire
+  build-depends: base >=4.18 && <5, aeson >=2.2 && <3, bytestring, containers, text
+
+executable fde-semantic
+  import: strict
+  hs-source-dirs: app
+  main-is: Main.hs
+  build-depends: base >=4.18 && <5, aeson >=2.2 && <3, bytestring, text, fde-semantic
+
+test-suite fde-kernel-laws
+  import: strict
+  type: exitcode-stdio-1.0
+  hs-source-dirs: test
+  main-is: Spec.hs
+  build-depends: base >=4.18 && <5, aeson >=2.2 && <3, bytestring, text, fde-semantic
+
+test-suite fde-admission-laws
+  import: strict
+  type: exitcode-stdio-1.0
+  hs-source-dirs: test
+  main-is: AdmissionSpec.hs
+  build-depends: base >=4.18 && <5, aeson >=2.2 && <3, bytestring, text, fde-semantic
+
+test-suite fde-industrial-laws
+  import: strict
+  type: exitcode-stdio-1.0
+  hs-source-dirs: test
+  main-is: IndustrialSpec.hs
+  build-depends: base >=4.18 && <5, aeson >=2.2 && <3, bytestring, text, fde-semantic
+
+test-suite fde-production-report-laws
+  import: strict
+  type: exitcode-stdio-1.0
+  hs-source-dirs: test
+  main-is: ProductionReportSpec.hs
+  build-depends: base >=4.18 && <5, aeson >=2.2 && <3, text, fde-semantic

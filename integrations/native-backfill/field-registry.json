@@ -1,0 +1,559 @@
+{
+  "schema": "fde.native-reporting-field-registry/v1",
+  "version": "2026-11-13-pilot",
+  "sourceClass": "synthetic-lab-only",
+  "sourceRolePolicy": "Use ERP for planning/admin; MES for execution and native quality/maintenance; synthetic EHS needs a new Frappe DocType",
+  "reportingWindows": {
+    "rollingFiveDays": "five most recent completed scheduled work dates",
+    "rollingTwelveMonths": "twelve completed fiscal/accounting periods",
+    "currentMonth": "period start to explicit report cutoff",
+    "periodRollover": "views refresh; source records remain immutable"
+  },
+  "knownNativePilot": {
+    "erpWorkOrders": 5,
+    "erpJobCards": 40,
+    "mesWorkOrders": 5,
+    "erpGoodUnits": 0,
+    "mesProducedUnits": 0,
+    "physicalProduction": false
+  },
+  "fields": [
+    {
+      "department": "shared",
+      "field": "work_date",
+      "source": "ERPNext",
+      "entity": "Work Order",
+      "nativeField": "planned_start_date",
+      "grain": "local work date × line × shift",
+      "status": "verified-in-native-ERP",
+      "notes": "Planning date only; never audit creation time."
+    },
+    {
+      "department": "shared",
+      "field": "shift_code",
+      "source": "OpenMES",
+      "entity": "Work Order",
+      "nativeField": "extra_data.shift",
+      "grain": "local work date × line × shift",
+      "status": "pilot-verified-payload",
+      "notes": "Separately bound to ERP shift; no assumed shift code in core Work Order."
+    },
+    {
+      "department": "shared",
+      "field": "line_code",
+      "source": "OpenMES",
+      "entity": "Line",
+      "nativeField": "code; Work Order.line_id",
+      "grain": "line",
+      "status": "pilot-verified-native",
+      "notes": "Pilot line CNDEMO-LINE-1."
+    },
+    {
+      "department": "shared",
+      "field": "company",
+      "source": "ERPNext",
+      "entity": "Work Order",
+      "nativeField": "company",
+      "grain": "company",
+      "status": "native-verified",
+      "notes": "CN Fictional Seat-Rail Lab."
+    },
+    {
+      "department": "shared",
+      "field": "erp_work_order",
+      "source": "ERPNext",
+      "entity": "Work Order",
+      "nativeField": "name",
+      "grain": "work order",
+      "status": "native-verified",
+      "notes": "ERP ordering identity."
+    },
+    {
+      "department": "shared",
+      "field": "mes_work_order",
+      "source": "OpenMES",
+      "entity": "Work Order",
+      "nativeField": "order_no; customer_order_no",
+      "grain": "work order",
+      "status": "native-verified",
+      "notes": "Explicit customer_order_no cross-system binding in pilot."
+    },
+    {
+      "department": "shared",
+      "field": "data_class",
+      "source": "OpenMES",
+      "entity": "Work Order",
+      "nativeField": "extra_data.data_class",
+      "grain": "source record",
+      "status": "native-verified",
+      "notes": "SYNTHETIC_HISTORICAL_PLANNING_NOT_PHYSICAL."
+    },
+    {
+      "department": "shared",
+      "field": "source_modified_at",
+      "source": "ERPNext/OpenMES",
+      "entity": "Work Order",
+      "nativeField": "modified / updated_at",
+      "grain": "record",
+      "status": "native-schema-visible",
+      "notes": "Actual insertion/update time; do not rewrite as historical."
+    },
+    {
+      "department": "calendar",
+      "field": "timezone",
+      "source": "config",
+      "entity": "Site Calendar",
+      "nativeField": "timezone",
+      "grain": "site/calendar version",
+      "status": "not-yet-approved",
+      "notes": "Asia/Shanghai in fictional lab; actual work site may differ."
+    },
+    {
+      "department": "calendar",
+      "field": "scheduled_workday",
+      "source": "config",
+      "entity": "Site Calendar",
+      "nativeField": "scheduled",
+      "grain": "site/day/shift",
+      "status": "provisional-only",
+      "notes": "Weekdays currently assumed; holidays/shutdowns not yet supplied."
+    },
+    {
+      "department": "calendar",
+      "field": "holiday",
+      "source": "ERPNext",
+      "entity": "Holiday List/Holiday",
+      "nativeField": "holiday_date; description",
+      "grain": "site/day",
+      "status": "doctype-verified-no-records",
+      "notes": "0 Holiday List records currently."
+    },
+    {
+      "department": "calendar",
+      "field": "fiscal_period",
+      "source": "ERPNext custom",
+      "entity": "FDE Fiscal Period",
+      "nativeField": "period_start; period_end",
+      "grain": "site/period",
+      "status": "not-installed",
+      "notes": "January calendar month currently a provisional placeholder, not the user's ACC calendar."
+    },
+    {
+      "department": "calendar",
+      "field": "accounting_month",
+      "source": "ERPNext custom",
+      "entity": "FDE Fiscal Period",
+      "nativeField": "period_key",
+      "grain": "period",
+      "status": "not-installed",
+      "notes": "Do not infer 4-4-5 from calendar date."
+    },
+    {
+      "department": "calendar",
+      "field": "reporting_cutoff",
+      "source": "config",
+      "entity": "Report Run",
+      "nativeField": "as_of_utc",
+      "grain": "report run",
+      "status": "must-be-supplied",
+      "notes": "Five last completed scheduled days and twelve completed fiscal months."
+    },
+    {
+      "department": "targets",
+      "field": "target_metric_id",
+      "source": "ERPNext custom",
+      "entity": "FDE KPI Target",
+      "nativeField": "metric_id",
+      "grain": "department/metric/period",
+      "status": "not-installed",
+      "notes": "Required for dashboard target comparisons."
+    },
+    {
+      "department": "targets",
+      "field": "target_value",
+      "source": "ERPNext custom",
+      "entity": "FDE KPI Target",
+      "nativeField": "value; unit",
+      "grain": "department/metric/period",
+      "status": "not-installed",
+      "notes": "Leave blank until set, never silently choose 85%."
+    },
+    {
+      "department": "targets",
+      "field": "target_effective_range",
+      "source": "ERPNext custom",
+      "entity": "FDE KPI Target",
+      "nativeField": "effective_from; effective_to",
+      "grain": "department/metric/period",
+      "status": "not-installed",
+      "notes": "Historical target must be effective-dated."
+    },
+    {
+      "department": "targets",
+      "field": "target_direction",
+      "source": "ERPNext custom",
+      "entity": "FDE KPI Target",
+      "nativeField": "higher_or_lower",
+      "grain": "metric",
+      "status": "not-installed",
+      "notes": "Must be approved with target."
+    },
+    {
+      "department": "production",
+      "field": "planned_units",
+      "source": "ERPNext",
+      "entity": "Work Order",
+      "nativeField": "qty",
+      "grain": "work date × line × shift",
+      "status": "native-verified",
+      "notes": "Submitted planning Work Orders; no stock entries."
+    },
+    {
+      "department": "production",
+      "field": "planned_start",
+      "source": "ERPNext",
+      "entity": "Work Order",
+      "nativeField": "planned_start_date",
+      "grain": "order",
+      "status": "native-verified",
+      "notes": "Historical business date accepted in pilot."
+    },
+    {
+      "department": "production",
+      "field": "recorded_erp_units",
+      "source": "ERPNext",
+      "entity": "Work Order",
+      "nativeField": "produced_qty",
+      "grain": "order",
+      "status": "native-verified",
+      "notes": "0 in pilot; not automatically accepted good output."
+    },
+    {
+      "department": "production",
+      "field": "mes_reported_units",
+      "source": "OpenMES",
+      "entity": "Work Order",
+      "nativeField": "produced_qty",
+      "grain": "order",
+      "status": "native-verified",
+      "notes": "0 PENDING in pilot; MES reported execution, not certified good."
+    },
+    {
+      "department": "production",
+      "field": "mes_order_status",
+      "source": "OpenMES",
+      "entity": "Work Order",
+      "nativeField": "status",
+      "grain": "order",
+      "status": "native-verified",
+      "notes": "PENDING in backfill pilot."
+    },
+    {
+      "department": "production",
+      "field": "operation_status",
+      "source": "OpenMES",
+      "entity": "Batch Step",
+      "nativeField": "status; started_at; completed_at",
+      "grain": "batch × step",
+      "status": "API-visible-not-backfilled",
+      "notes": "Require native execution before using in performance."
+    },
+    {
+      "department": "production",
+      "field": "good_units",
+      "source": "OpenMES + Quality",
+      "entity": "Batch/Quality",
+      "nativeField": "accepted_final_units",
+      "grain": "cohort/order/shift",
+      "status": "requires-new-validated-definition",
+      "notes": "MES produced_qty alone must NOT become good units."
+    },
+    {
+      "department": "production",
+      "field": "rejected_units",
+      "source": "OpenMES",
+      "entity": "Scrap Entry",
+      "nativeField": "quantity; reason",
+      "grain": "lot/order",
+      "status": "API-route-confirmed-not-backfilled",
+      "notes": "Validate nonoverlap with rework and quality records."
+    },
+    {
+      "department": "production",
+      "field": "unplanned_downtime_minutes",
+      "source": "OpenMES",
+      "entity": "Production Downtime",
+      "nativeField": "started_at; ended_at; duration_minutes; reason_id",
+      "grain": "line × interval",
+      "status": "API-route-confirmed-not-backfilled",
+      "notes": "Exclude planned downtime and overlapping intervals."
+    },
+    {
+      "department": "production",
+      "field": "attainment_pct",
+      "source": "FDE Haskell",
+      "entity": "Production Report",
+      "nativeField": "good_units / approved_planned_units",
+      "grain": "population/period",
+      "status": "calculation-implemented-requires-qualified-input",
+      "notes": "Never average daily percentages. Not OEE."
+    },
+    {
+      "department": "production",
+      "field": "loss_reason",
+      "source": "OpenMES",
+      "entity": "Scrap/Stop/Downtime",
+      "nativeField": "reason_id; quantity/duration",
+      "grain": "source event",
+      "status": "requires-method-specific-mapping",
+      "notes": "Time losses are not automatically lost-unit equivalents."
+    },
+    {
+      "department": "quality",
+      "field": "quality_inspection_id",
+      "source": "ERPNext",
+      "entity": "Quality Inspection",
+      "nativeField": "name; reference_type; reference_name",
+      "grain": "inspection event",
+      "status": "doctype-verified-no-native-samples",
+      "notes": "0 submitted inspections at baseline."
+    },
+    {
+      "department": "quality",
+      "field": "inspection_date",
+      "source": "ERPNext",
+      "entity": "Quality Inspection",
+      "nativeField": "report_date",
+      "grain": "inspection event",
+      "status": "doctype-verified-no-native-samples",
+      "notes": "Must map to shift/business date."
+    },
+    {
+      "department": "quality",
+      "field": "inspection_population",
+      "source": "ERPNext",
+      "entity": "Quality Inspection",
+      "nativeField": "sample_size",
+      "grain": "inspection cohort",
+      "status": "doctype-verified-no-native-samples",
+      "notes": "Sample size is not total production population."
+    },
+    {
+      "department": "quality",
+      "field": "mes_quality_sample",
+      "source": "OpenMES",
+      "entity": "QualityCheck Sample",
+      "nativeField": "sample_number; is_passed; parameter_name",
+      "grain": "batch × sample",
+      "status": "API-route-confirmed-not-backfilled",
+      "notes": "Native quality check POST supported after batches exist."
+    },
+    {
+      "department": "quality",
+      "field": "first_pass_good",
+      "source": "ERPNext/MES",
+      "entity": "First-pass cohort",
+      "nativeField": "initial_passed_units",
+      "grain": "initial inspection population",
+      "status": "missing-custom-cohort",
+      "notes": "Never count reinspection twice."
+    },
+    {
+      "department": "quality",
+      "field": "rejected_units",
+      "source": "ERPNext/MES",
+      "entity": "Quality defect/lot",
+      "nativeField": "reject_qty",
+      "grain": "inspection cohort",
+      "status": "requires-new-cohort-mapping",
+      "notes": "Accepted + rejected must match inspected under defined semantics."
+    },
+    {
+      "department": "quality",
+      "field": "defect_reason",
+      "source": "ERPNext/MES",
+      "entity": "Quality/Defect Reason",
+      "nativeField": "reason_code",
+      "grain": "reject event",
+      "status": "not-yet-validated",
+      "notes": "Mutually exclusive primary reasons."
+    },
+    {
+      "department": "quality",
+      "field": "quality_action",
+      "source": "ERPNext",
+      "entity": "Quality Action",
+      "nativeField": "status; date; resolutions",
+      "grain": "corrective action",
+      "status": "native-verified-only-one-open-example",
+      "notes": "Do not infer approved cause or closed CAPA."
+    },
+    {
+      "department": "quality",
+      "field": "scrap_rate",
+      "source": "FDE Haskell future",
+      "entity": "Quality cohort",
+      "nativeField": "scrapped / qualifying_units",
+      "grain": "qualified population",
+      "status": "not-implemented",
+      "notes": "Blank until accepted numerator/denominator population."
+    },
+    {
+      "department": "safety",
+      "field": "safety_event_id",
+      "source": "ERPNext custom",
+      "entity": "FDE Synthetic EHS Event",
+      "nativeField": "external_key",
+      "grain": "event",
+      "status": "not-installed",
+      "notes": "No native safety incident DocType verified."
+    },
+    {
+      "department": "safety",
+      "field": "event_kind",
+      "source": "ERPNext custom",
+      "entity": "FDE Synthetic EHS Event",
+      "nativeField": "incident / near_miss / observation",
+      "grain": "event",
+      "status": "not-installed",
+      "notes": "Synthetic-only legal_reportability=NOT_ASSESSED."
+    },
+    {
+      "department": "safety",
+      "field": "event_severity",
+      "source": "ERPNext custom",
+      "entity": "FDE Synthetic EHS Event",
+      "nativeField": "scenario_severity; lost_days",
+      "grain": "event",
+      "status": "not-installed",
+      "notes": "Never treat synthetic legal classification as recordable."
+    },
+    {
+      "department": "safety",
+      "field": "worker_exposure_hours",
+      "source": "ERPNext custom",
+      "entity": "FDE Synthetic Exposure Hours",
+      "nativeField": "worker_hours; coverage_status",
+      "grain": "department × shift",
+      "status": "not-installed",
+      "notes": "Required denominator for rates; missing hours => N/A."
+    },
+    {
+      "department": "safety",
+      "field": "open_corrective_actions",
+      "source": "ERPNext custom",
+      "entity": "FDE Synthetic EHS Action",
+      "nativeField": "status; due_date; verified_at",
+      "grain": "action",
+      "status": "not-installed",
+      "notes": "Actions are not closed by model drafts."
+    },
+    {
+      "department": "safety",
+      "field": "safety_rate",
+      "source": "FDE Haskell future",
+      "entity": "Safety rate",
+      "nativeField": "qualified incidents × exposure basis / hours",
+      "grain": "department/period",
+      "status": "not-implemented",
+      "notes": "Do not label TRIR or regulatory rate without actual approved definitions."
+    },
+    {
+      "department": "maintenance",
+      "field": "equipment_asset",
+      "source": "ERPNext",
+      "entity": "Asset",
+      "nativeField": "asset_id / asset_name",
+      "grain": "asset",
+      "status": "native-verified",
+      "notes": "8 draft equipment assets in fictional lab."
+    },
+    {
+      "department": "maintenance",
+      "field": "planned_pm_due",
+      "source": "ERPNext",
+      "entity": "Asset Maintenance Task",
+      "nativeField": "next_due_date; periodicity",
+      "grain": "asset × occurrence",
+      "status": "native-verified-pilot-not-complete",
+      "notes": "8 planned reference asset maintenance documents."
+    },
+    {
+      "department": "maintenance",
+      "field": "native_mes_schedule",
+      "source": "OpenMES",
+      "entity": "Maintenance Schedule",
+      "nativeField": "id; tool_id; line_id; next_due_at",
+      "grain": "tool × schedule",
+      "status": "native-verified-inactive",
+      "notes": "8 inactive schedules; not completed maintenance."
+    },
+    {
+      "department": "maintenance",
+      "field": "mes_pm_event",
+      "source": "OpenMES",
+      "entity": "Maintenance Event",
+      "nativeField": "scheduled_at; event_type; status",
+      "grain": "tool × occurrence",
+      "status": "API-route-verified-not-backfilled",
+      "notes": "POST supports historical scheduled_at, completion via separate lifecycle."
+    },
+    {
+      "department": "maintenance",
+      "field": "pm_start_end",
+      "source": "OpenMES",
+      "entity": "Maintenance Event",
+      "nativeField": "started_at; completed_at",
+      "grain": "event",
+      "status": "lifecycle-not-historical-verified",
+      "notes": "Native start/complete sets actual now() timestamps."
+    },
+    {
+      "department": "maintenance",
+      "field": "breakdown_downtime",
+      "source": "OpenMES",
+      "entity": "Production Downtime",
+      "nativeField": "started_at; ended_at; duration_minutes",
+      "grain": "line × interval",
+      "status": "API-route-confirmed-not-backfilled",
+      "notes": "Native start/stop uses now(); historical outage needs approved model."
+    },
+    {
+      "department": "maintenance",
+      "field": "pm_on_time_rate",
+      "source": "FDE Haskell future",
+      "entity": "PM obligation",
+      "nativeField": "on_time_completed / due_at_cutoff",
+      "grain": "asset/period",
+      "status": "not-implemented",
+      "notes": "Require eligible due population and native complete timestamps."
+    },
+    {
+      "department": "maintenance",
+      "field": "mttr",
+      "source": "FDE Haskell future",
+      "entity": "Failure/restore pair",
+      "nativeField": "sum(repair_restore_elapsed)/eligible_failures",
+      "grain": "equipment/period",
+      "status": "not-implemented",
+      "notes": "No time-qualified native restoration history yet."
+    },
+    {
+      "department": "maintenance",
+      "field": "mtbf",
+      "source": "FDE Haskell future",
+      "entity": "Equipment exposure",
+      "nativeField": "operating_exposure/qualified_failures",
+      "grain": "equipment/period",
+      "status": "not-implemented",
+      "notes": "Operating hours unavailable; report N/A."
+    }
+  ],
+  "approvalPolicy": {
+    "fiscalCalendar": "not provided",
+    "holidays": "not provided",
+    "historicalTargets": "not provided",
+    "safetyReportability": "not assessed",
+    "externalDeployment": "not approved"
+  }
+}

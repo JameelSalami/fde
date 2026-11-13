@@ -1,0 +1,32 @@
+# Synthetic-only public source repository
+node_modules/
+dist/
+.venv/
+__pycache__/
+*.pyc
+*.log
+*.tmp
+.env
+.env.*
+*.pem
+*.key
+*.crt
+*credentials*
+*secrets*
+.local/
+.data/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+kernel/dist-newstyle/
+kernel/bin/
+.cache/
+reports/
+.DS_Store
+desktop.ini
+*.bak
+
+# Markdown is private; never stage it in the source-only public tree.
+*.md
+*.mdx
+*.markdown

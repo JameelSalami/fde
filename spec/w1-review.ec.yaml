@@ -1,0 +1,51 @@
+{
+  "schema": "fde.operational-projection-package/v1",
+  "package": {"id":"fde.w1.erp-mes-review","version":"1.0.0","status":"reference"},
+  "sources": {
+    "adapters": [
+      {"id":"erpnext-order-read","role":"erp","vendor":"erpnext","coverage":{"order":"exact-native-row","receipt":"not-covered","ledger":"not-covered","physical":"not-covered"}},
+      {"id":"openmes-order-read","role":"mes","vendor":"openmes","coverage":{"order":"exact-native-row","receipt":"not-covered","ledger":"not-covered","physical":"not-covered"}}
+    ],
+    "semantic": {"modelId":"fde.w1.production-order","modelVersion":"v1","mappingId":"fde.w1.synthetic-pcs-Nos/v1"},
+    "gar": {"project":"fde","corpusLane":"grounding-reference","knowledgeAnswerability":"not-verified","knowledgeGroundingStatus":"candidate-only","requiredClaimState":"supported"}
+  },
+  "semantics": {
+    "factIds": ["fact:erp-planned-quantity","fact:mes-planned-quantity","fact:erp-reported-quantity","fact:mes-reported-quantity","fact:receipt-evidence","fact:ledger-evidence","fact:physical-production"],
+    "constraintIds": ["constraint:erp-report-known","constraint:mes-report-known","constraint:plan-alignment","constraint:reported-alignment","constraint:physical-production-known"],
+    "claimKinds": ["native-reported-values","source-coverage-limit","physical-production-occurred","reported-quantity"]
+  },
+  "application": {
+    "roles": ["viewer","reviewer","operator"],
+    "fields": [
+      {"id":"erpReportedQuantity","label":"ERP reported quantity","ownership":"source-owned","ownerId":"erpnext","classification":"organization-owned","portability":"restricted","semanticFactId":"fact:erp-reported-quantity"},
+      {"id":"mesReportedQuantity","label":"MES reported quantity","ownership":"source-owned","ownerId":"openmes","classification":"organization-owned","portability":"restricted","semanticFactId":"fact:mes-reported-quantity"},
+      {"id":"physicalProduction","label":"Physical production","ownership":"derived","ownerId":"fde-haskell","classification":"derived","portability":"restricted","semanticFactId":"fact:physical-production"},
+      {"id":"supportState","label":"GAR support state","ownership":"derived","ownerId":"gar","classification":"derived","portability":"portable","semanticFactId":null},
+      {"id":"assignee","label":"Assignee","ownership":"workflow-owned","ownerId":"fde-review","classification":"organization-owned","portability":"restricted","semanticFactId":null},
+      {"id":"disposition","label":"Disposition","ownership":"workflow-owned","ownerId":"fde-review","classification":"organization-owned","portability":"portable","semanticFactId":null},
+      {"id":"note","label":"Review note","ownership":"workflow-owned","ownerId":"fde-review","classification":"organization-owned","portability":"restricted","semanticFactId":null}
+    ],
+    "workflow": {
+      "id":"fde.w1.review","version":"1.0.0","initial":"open","states":["open","needs-investigation","reviewed"],
+      "transitions": [
+        {"id":"set-open","from":"any","to":"open","actorRoles":["reviewer","operator"]},
+        {"id":"set-needs-investigation","from":"any","to":"needs-investigation","actorRoles":["reviewer","operator"]},
+        {"id":"set-reviewed","from":"any","to":"reviewed","actorRoles":["reviewer","operator"]}
+      ]
+    },
+    "captures": [{"id":"review-update","mode":"workflow-update","fieldIds":["assignee","disposition","note"]}],
+    "projections": [
+      {"id":"web-review","kind":"web","fieldIds":["erpReportedQuantity","mesReportedQuantity","physicalProduction","supportState","assignee","disposition","note"],"editableFieldIds":["assignee","disposition","note"]},
+      {"id":"csv-evidence","kind":"csv","fieldIds":["erpReportedQuantity","mesReportedQuantity","physicalProduction","supportState"],"editableFieldIds":[]},
+      {"id":"json-evidence","kind":"json","fieldIds":["erpReportedQuantity","mesReportedQuantity","physicalProduction","supportState"],"editableFieldIds":[]}
+    ],
+    "exportPolicy": {"id":"w1-evidence-handoff","allow":["erpReportedQuantity","mesReportedQuantity","physicalProduction","supportState"],"deny":["assignee","disposition","note"]},
+    "effectBoundary": {"vendorEffects":"none","proposalOnly":true}
+  },
+  "implementation": {
+    "targets": ["kernel/src/FDE/Semantic.hs","src/semantic-client.ts","src/gar-support.ts","src/review-store.ts","src/workspace.ts","src/export.ts"],
+    "generatedDir": "generated/w1-package"
+  },
+  "outputs": ["package-ir","json-schema","conformance-fixtures","documentation"],
+  "conformance": {"scenarioIds":["fde-w1-native-support","fde-w1-physical-abstain","fde-w1-source-unavailable","fde-w1-review-concurrency","fde-w1-pinned-handoff"]}
+}

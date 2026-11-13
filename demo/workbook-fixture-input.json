@@ -1,0 +1,68 @@
+{
+  "schema": "fde.case/v1",
+  "erp": {
+    "schema": "fde.native-observation/v1",
+    "dataClass": "handwritten-fixture",
+    "role": "erp",
+    "vendor": "erpnext",
+    "instance": "fixture-erp-20261112",
+    "nativeId": "WO-TEST-117",
+    "businessId": "WO-TEST-117",
+    "revision": "erp-fixture-r3",
+    "nativeState": "In Process",
+    "planned": "12.000000",
+    "reported": "4.500000",
+    "unit": "Nos",
+    "coverage": {
+      "order": "exact-native-row",
+      "receipt": "not-covered",
+      "ledger": "not-covered",
+      "physical": "not-covered"
+    },
+    "capture": {
+      "observedAt": "2026-11-12T14:05:00.000Z",
+      "querySha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "mode": "fixture",
+      "transport": "not-applicable"
+    }
+  },
+  "mes": {
+    "schema": "fde.native-observation/v1",
+    "dataClass": "handwritten-fixture",
+    "role": "mes",
+    "vendor": "openmes",
+    "instance": "fixture-mes-20261112",
+    "nativeId": "449",
+    "businessId": "MES-TEST-117",
+    "revision": "mes-fixture-r4",
+    "nativeState": "IN_PROGRESS",
+    "planned": "12.000000",
+    "reported": "6.250000",
+    "unit": "pcs",
+    "coverage": {
+      "order": "exact-native-row",
+      "receipt": "not-covered",
+      "ledger": "not-covered",
+      "physical": "not-covered"
+    },
+    "capture": {
+      "observedAt": "2026-11-12T14:09:00.000Z",
+      "querySha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "mode": "fixture",
+      "transport": "not-applicable"
+    }
+  },
+  "binding": {
+    "schema": "fde.native-binding/v1",
+    "grade": "synthetic-native-import-reviewed",
+    "erp": {
+      "instance": "fixture-erp-20261112",
+      "nativeId": "WO-TEST-117"
+    },
+    "mes": {
+      "instance": "fixture-mes-20261112",
+      "nativeId": "449"
+    },
+    "unit": "synthetic-pcs-equals-Nos"
+  }
+}

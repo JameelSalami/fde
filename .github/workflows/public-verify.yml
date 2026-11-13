@@ -1,0 +1,55 @@
+name: FDE public source verification
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "src/**"
+      - "test/**"
+      - "kernel/**"
+      - "scripts/**"
+      - "integrations/**"
+      - "demo/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/public-verify.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  deterministic-source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    env:
+      FDE_AZURE_MODEL_CALL_APPROVED: "0"
+      FDE_NATIVE_BACKFILL_APPLY: "0"
+    steps:
+      - name: Checkout source without persisting credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Haskell compiler + Cabal
+        uses: haskell-actions/setup@v2.12.1
+        with:
+          ghc-version: "9.12.4"
+          cabal-version: "3.16.1.0"
+      - name: Install locked Node dependencies
+        run: npm ci
+      - name: Resolve Haskell dependencies
+        run: cabal update
+      - name: Reject private Markdown and sensitive public source
+        run: python3 scripts/audit-public-source.py
+      - name: Run FDE test gate
+        run: npm run verify
+      - name: Validate fictional reporting fixture
+        run: python3 scripts/check-public-fixture.py
+      - name: Test deterministic native-history generator
+        run: python3 -m unittest discover -s integrations/native-backfill/tests -v

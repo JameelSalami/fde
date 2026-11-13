@@ -1,0 +1,35 @@
+{
+  "schema": "fde.native-backfill-pilot/v1",
+  "runId": "FDEBF14-20261113",
+  "dataClass": "SYNTHETIC_HISTORICAL_PLANNING_NOT_PHYSICAL",
+  "site": "cn-reference-20261016.localhost",
+  "lineCode": "CNDEMO-LINE-1",
+  "timezone": "Asia/Shanghai",
+  "rows": [
+    {
+      "workDate": "2026-11-06",
+      "shift": "A",
+      "plannedUnits": 14
+    },
+    {
+      "workDate": "2026-11-09",
+      "shift": "A",
+      "plannedUnits": 17
+    },
+    {
+      "workDate": "2026-11-10",
+      "shift": "A",
+      "plannedUnits": 20
+    },
+    {
+      "workDate": "2026-11-11",
+      "shift": "A",
+      "plannedUnits": 16
+    },
+    {
+      "workDate": "2026-11-12",
+      "shift": "A",
+      "plannedUnits": 19
+    }
+  ]
+}

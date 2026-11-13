@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:fde:w1:review-update:1.0.0",
+  "title": "FDE W1 review update",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "assignee",
+    "disposition",
+    "note"
+  ],
+  "properties": {
+    "assignee": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_-]{0,47}$"
+        }
+      ]
+    },
+    "disposition": {
+      "type": "string",
+      "enum": [
+        "open",
+        "needs-investigation",
+        "reviewed"
+      ]
+    },
+    "note": {
+      "type": "string",
+      "maxLength": 2000
+    }
+  },
+  "x-fde-authority": "workflow-only",
+  "x-fde-source-write-allowed": false
+}

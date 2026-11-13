@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>FDE — Connected Workbench</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to workbench</a>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Workbench navigation">
+      <a class="brand" href="/" aria-label="FDE workbench home">
+        <span class="brand-mark" aria-hidden="true">F<span>∙</span></span>
+        <span><strong>FDE</strong><small>Connected Workbench</small></span>
+      </a>
+      <a class="nav-item" href="/workbench"><span class="nav-num">↗</span> Industrial investigations</a>
+      <div class="sidebar-label">WORKSPACE</div>
+      <nav id="side-nav" aria-label="Views">
+        <button class="nav-item active" data-section="case" aria-current="page"><span class="nav-num">01</span> Case room <span class="nav-dot"></span></button>
+        <button class="nav-item" data-section="evidence"><span class="nav-num">02</span> Source evidence</button>
+        <button class="nav-item" data-section="why"><span class="nav-num">03</span> Why / lineage</button>
+        <button class="nav-item" data-section="workspace"><span class="nav-num">04</span> My workspace</button>
+        <button class="nav-item" data-section="handoff"><span class="nav-num">05</span> Handoff</button>
+      </nav>
+      <div class="side-divider"></div>
+      <div class="sidebar-label">OPERATIONS</div>
+      <nav aria-label="Operations">
+        <button class="nav-item" data-section="boundary"><span class="nav-num">06</span> IT &amp; boundaries</button>
+      </nav>
+      <div class="sidebar-spacer"></div>
+      <div class="side-footer">
+        <span class="side-foot-dot" aria-hidden="true"></span>
+        <div><strong>Isolated laboratory</strong><small>Read-only · no vendor effects</small></div>
+      </div>
+      <div class="side-version">Local reference • v0.1</div>
+    </aside>
+    <div class="content-shell">
+      <header class="topbar">
+        <div class="breadcrumbs"><span>Engineering</span><span class="crumb-sep">/</span><strong>Connected work</strong></div>
+        <div class="top-actions">
+          <div id="connection-pill" class="connection-pill" role="status"><span class="pulse"></span><span id="connection-label">Connecting to sources</span></div>
+          <button id="refresh-btn" class="button button-outline" type="button"><span class="refresh-icon" aria-hidden="true">↻</span> Refresh evidence</button>
+        </div>
+      </header>
+      <main id="main-content" tabindex="-1">
+        <section id="view-case" class="main-view" aria-labelledby="case-heading">
+          <div class="intro">
+            <div class="eyebrow"><span class="eyebrow-line"></span> OPERATIONAL CASE / 001</div>
+            <div class="hero-grid">
+              <div>
+                <h1 id="case-heading">Make the work <em>understandable.</em></h1>
+                <p class="hero-copy">Two systems, one operational question. Keep the native evidence, see the semantic interpretation, and take a usable deliverable back into your workflow.</p>
+              </div>
+              <div class="hero-aside">
+                <div class="aside-head">CURRENT QUESTION</div>
+                <p id="case-question">What do ERPNext and OpenMES report about this order?</p>
+                <button class="subtle-link" type="button" data-goto="workspace">Edit my working question <span aria-hidden="true">↗</span></button>
+              </div>
+            </div>
+            <div class="case-meta">
+              <span id="source-class" class="tag tag-synthetic">SOURCE CLASS NOT YET OBSERVED</span>
+              <span class="tag tag-neutral">SOURCE LINKED</span>
+              <span class="tag tag-neutral">NON-AUTHORITATIVE</span>
+              <span id="observation-time" class="observed-time">Awaiting source reads</span>
+            </div>
+          </div>
+
+          <div class="section-header">
+            <div><p class="overline">SOURCE-BOUND VIEW</p><h2>What the systems report</h2></div>
+            <button class="small-link" type="button" data-goto="evidence">Inspect source records <span aria-hidden="true">↗</span></button>
+          </div>
+          <div class="metrics">
+            <div class="metric"><div class="metric-label">ERP RECORDED QUANTITY <span class="source-label">ERPNext</span></div><div class="metric-value"><span id="erp-reported">—</span> <small>Nos</small></div><p>Source-native recorded amount</p></div>
+            <div class="metric"><div class="metric-label">MES REPORTED QUANTITY <span class="source-label">OpenMES</span></div><div class="metric-value"><span id="mes-reported">—</span> <small>pcs</small></div><p>Reported, not physically witnessed</p></div>
+            <div class="metric metric-emphasis"><div class="metric-label">COMPILED REPORT DIFFERENCE <span class="source-label">Haskell</span></div><div class="metric-value"><span id="compiled-delta">—</span> <small>units*</small></div><p id="compiled-classification">Awaiting compilation</p></div>
+          </div>
+          <p class="metric-footnote">* Difference is valid only under the named synthetic 1:1 pcs↔Nos test binding. It is not a certified inventory or physical production discrepancy.</p>
+
+          <div class="section-header section-canvas">
+            <div><p class="overline">MY WORK SURFACE</p><h2>Arrange your context</h2></div>
+            <button id="customize-btn" class="small-link" type="button" data-goto="workspace">Customize panels <span aria-hidden="true">↗</span></button>
+          </div>
+          <article id="durable-review" class="white-card gap-card hidden">
+            <p class="overline">SHARED REVIEW</p><h2>Record the investigation</h2>
+            <p id="review-session" class="muted-small"></p>
+            <p id="review-currentness" role="status">Loading the saved review…</p>
+            <details id="fde-step-detail"><summary>Source, semantics, and human-review evidence</summary>
+              <p id="fde-step-decision" class="muted-small" role="status">Loading qualification…</p>
+              <div class="inline-actions">
+                <button type="button" class="button button-outline" data-fde-step="sources">Native source receipts</button>
+                <button type="button" class="button button-outline" data-fde-step="semantics">Haskell interpretation</button>
+                <button type="button" class="button button-outline" data-fde-step="review">Human review</button>
+              </div>
+              <ul id="fde-step-list" class="review-history"></ul>
+            </details>
+            <div class="review-fields">
+              <label class="field-label" for="review-assignee">Assigned reviewer<select id="review-assignee"><option value="">Unassigned</option></select></label>
+              <label class="field-label" for="review-disposition">Disposition<select id="review-disposition"><option value="open">Open</option><option value="needs-investigation">Needs investigation</option><option value="reviewed">Reviewed</option></select></label>
+            </div>
+            <label class="field-label" for="review-note">Investigation note</label><textarea id="review-note" rows="3" maxlength="2000" placeholder="Record what you checked, what remains uncertain, and the next action."></textarea>
+            <p class="field-hint">Saved with your identity and the pinned evidence. Reviewed means a human reviewed this case; it does not certify production or change the source systems.</p>
+            <div class="inline-actions"><button id="save-review" class="button button-primary" type="button" disabled>Save review</button><button id="replay-review" class="button button-outline" type="button">Verify pinned replay</button><button id="export-handoff" class="button button-outline" type="button">Download review handoff</button></div>
+            <details><summary>Suggested investigation</summary>
+              <p id="investigation-mode" class="muted-small">Fixed evidence summary</p>
+              <ul id="investigation-cards" class="review-history"></ul><ol id="investigation-questions" class="review-history"></ol>
+              <button id="draft-investigation" class="button button-outline" type="button" disabled>Suggest investigation priorities</button>
+              <p class="field-hint">Suggestions need human review. They do not save a disposition, approve a result or change the sources.</p>
+            </details>
+            <details><summary>Review history</summary><ol id="review-history" class="review-history"></ol></details>
+            <details><summary>Previous observations</summary><ul id="observation-history" class="review-history"></ul></details>
+          </article>
+          <p class="section-desc">Move or hide the panels you need. Changes stay in this browser, never in the ERP, MES, or compiled semantic record.</p>
+          <div id="panel-grid" class="panel-grid" aria-live="polite"></div>
+        </section>
+
+        <section id="view-evidence" class="main-view hidden" aria-labelledby="evidence-heading">
+          <div class="page-intro"><p class="overline">SOURCE RECORDS / 002</p><h1 id="evidence-heading">Two systems. <em>No guessed truth.</em></h1><p>Native identities, versions, timestamps and query footprints are preserved side by side. Each database read is independent.</p></div>
+          <div class="evidence-grid">
+            <article class="white-card"><div class="card-heading"><span class="source-icon icon-erp">E</span><div><p class="overline">SOURCE 01</p><h2>ERPNext</h2></div></div><dl id="erp-details" class="detail-list"></dl></article>
+            <article class="white-card"><div class="card-heading"><span class="source-icon icon-mes">M</span><div><p class="overline">SOURCE 02</p><h2>OpenMES</h2></div></div><dl id="mes-details" class="detail-list"></dl></article>
+          </div>
+          <article class="white-card gap-card"><div class="card-heading"><span class="source-icon icon-link">⌁</span><div><p class="overline">REVIEWED SYNTHETIC MAPPING</p><h2>Cross-source binding</h2></div></div><dl id="binding-details" class="detail-list"></dl><div class="note-warning">Matching identifiers, quantities, or labels do not independently prove real-world identity. This pair uses a named synthetic laboratory binding.</div></article>
+        </section>
+
+        <section id="view-why" class="main-view hidden" aria-labelledby="why-heading">
+          <div class="page-intro"><p class="overline">EVIDENCE LINEAGE / 003</p><h1 id="why-heading">Show me <em>why.</em></h1><p>This is an inspection of the facts supplied to the compiled Haskell diagnostic—not a machine-generated causal story about the factory.</p></div>
+          <div class="reason-banner"><div><div class="overline">COMPILED DIAGNOSTIC</div><strong id="why-classification">Awaiting source evidence</strong></div><span class="tag tag-neutral">CANDIDATE ONLY</span></div>
+          <div id="why-list" class="why-list"></div>
+          <div class="white-card gap-card"><p class="overline">THINGS WE CANNOT CLAIM</p><h2>What remains unknown</h2><ul id="unknown-list" class="unknown-list"></ul></div>
+        </section>
+
+        <section id="view-workspace" class="main-view hidden" aria-labelledby="workspace-heading">
+          <div class="page-intro"><p class="overline">LOCAL WORKSPACE / 004</p><h1 id="workspace-heading">Your context, <em>your arrangement.</em></h1><p>The operator question, notes, and panel layout belong to this browser. They cannot edit source records or change Haskell's interpretation.</p></div>
+          <article class="white-card"><p class="overline">QUESTION / HUMAN CONTEXT</p><label for="question-input" class="field-label">What are you trying to understand?</label><textarea id="question-input" maxlength="280" rows="3" placeholder="Describe the operational question. This is context, not a command."></textarea><p class="field-hint">Local to this browser. No AI request, query generation, or source write is performed.</p></article>
+          <article class="white-card gap-card"><div class="card-heading-wide"><div><p class="overline">PANEL ARRANGEMENT</p><h2>Choose what you see</h2></div><button id="restore-panels" class="button button-outline small" type="button">Restore all</button></div><div id="panel-preferences" class="preferences-list"></div></article>
+          <article class="white-card gap-card"><p class="overline">LOCAL FIELD NOTES</p><label for="working-note" class="field-label">What should the next engineer know?</label><textarea id="working-note" maxlength="5000" rows="7" placeholder="Example: Confirm whether the ERP recorded count is backed by a posted Manufacture voucher. Do not invent the answer."></textarea><p class="field-hint">Only in this browser. Do not enter company secrets. Download a separate personal handoff note if needed.</p><div class="inline-actions"><button id="export-note" class="button button-outline" type="button">Download my note</button><span id="saved-indicator" class="muted-small">Not sent to the host</span></div></article>
+        </section>
+
+        <section id="view-handoff" class="main-view hidden" aria-labelledby="handoff-heading">
+          <div class="page-intro"><p class="overline">DELIVERABLE / 005</p><h1 id="handoff-heading">Leave something <em>usable.</em></h1><p>One captured observation, two formats. The CSV opens in Excel; JSON retains the exact source-bound evidence. Both export the snapshot you are viewing—not a hidden new source read.</p></div>
+          <div class="handoff-grid">
+            <article class="white-card handoff-card"><div class="handoff-symbol">CSV</div><p class="overline">EXCEL-COMPATIBLE</p><h2>Evidence table</h2><p>Four source-bound semantic candidates in one quoted CSV, with native identifiers, exact quantity strings, source revisions and compiled diagnostic.</p><button id="export-csv" class="button button-primary" type="button" disabled>Download CSV <span aria-hidden="true">↓</span></button></article>
+            <article class="white-card handoff-card"><div class="handoff-symbol handoff-json">{ }</div><p class="overline">LOSSLESS RECEIPT</p><h2>Case evidence JSON</h2><p>Versioned, immutable display snapshot with native source receipts, Haskell interpretation, evidence links, and limitations.</p><button id="export-json" class="button button-dark" type="button" disabled>Download JSON <span aria-hidden="true">↓</span></button></article>
+          </div>
+          <div class="note-warning gap-card">These are non-authoritative deliverables. A CSV does not approve vendor data, update an ERP/MES row, replace an Excel model, or establish independent physical output.</div>
+          <article class="white-card gap-card"><p class="overline">CURRENT OBSERVATION</p><dl id="handoff-identity" class="detail-list"></dl></article>
+        </section>
+
+        <section id="view-boundary" class="main-view hidden" aria-labelledby="boundary-heading">
+          <div class="page-intro"><p class="overline">IT / SOURCE GUARANTEES / 006</p><h1 id="boundary-heading">Clear owners. <em>Clear limits.</em></h1><p>Connections are managed by the existing host. This page explains the security boundary; it does not issue credentials or administer customer production systems.</p></div>
+          <div class="boundary-grid">
+            <article class="white-card"><span class="boundary-num">01 / VENDORS</span><h2>Systems of record</h2><p>ERPNext and OpenMES own their native records, status transitions, inventory and system-specific actions.</p></article>
+            <article class="white-card"><span class="boundary-num">02 / HOST</span><h2>Acquisition &amp; delivery</h2><p>Existing least-privilege SQL accounts, verified TLS, separate READ ONLY transactions and source-bound receipts.</p></article>
+            <article class="white-card"><span class="boundary-num">03 / HASKELL</span><h2>Semantic interpretation</h2><p>Pure compiled quantity comparison, typed candidates, mapping checks and refusals. No source effects.</p></article>
+            <article class="white-card"><span class="boundary-num">04 / WORKSPACE</span><h2>Human context</h2><p>Browser-local questions, notes, layout, source evidence, explanations and Excel-compatible handoff.</p></article>
+          </div>
+          <article class="white-card gap-card"><p class="overline">CURRENT HOST READ RECEIPTS</p><dl id="host-read-receipts" class="detail-list"></dl></article>
+          <div class="note-warning gap-card">The private application host supports scoped lab roles and saved human review. This does not establish enterprise IAM, tenant isolation, production approval or a vendor write gateway. The preview host has no shared review workflow. Both listen on localhost only.</div>
+        </section>
+        <div class="footnote-bar"><span>FDE / engineering reference</span><span>Observe → Bind → Interpret → Explain → Handoff</span><span>Authority: none</span></div>
+      </main>
+    </div>
+  </div>
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+{
+  "schema": "fde.package-conformance-fixtures/v1",
+  "packageId": "fde.w1.erp-mes-review",
+  "fixtures": [
+    {
+      "id": "pkg-current",
+      "expect": "accepted",
+      "law": "Haskell catalog + GAR lane + ownership + effect boundary"
+    },
+    {
+      "id": "pkg-unknown-semantic-fact",
+      "expect": "refused",
+      "law": "semantic references must exist in Haskell catalog"
+    },
+    {
+      "id": "pkg-working-memory-gar",
+      "expect": "refused",
+      "law": "GAR must use fde grounding-reference lane"
+    },
+    {
+      "id": "pkg-source-field-capture",
+      "expect": "refused",
+      "law": "capture may edit workflow-owned fields only"
+    },
+    {
+      "id": "pkg-vendor-effect",
+      "expect": "refused",
+      "law": "package cannot grant vendor effects"
+    },
+    {
+      "id": "pkg-projection-source-edit",
+      "expect": "refused",
+      "law": "projection editability cannot include source-owned fields"
+    }
+  ]
+}

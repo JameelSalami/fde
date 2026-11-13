@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>FDE — Industrial investigations</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/workbench.css">
+  <script src="/workbench.js" defer></script>
+</head>
+<body class="industrial-workbench">
+  <a class="skip-link" href="#workbench-main">Skip to investigation</a>
+  <div class="app-shell">
+    <aside class="sidebar wb-sidebar" aria-label="Investigations">
+      <a class="brand" href="/workbench" aria-label="FDE industrial investigations">
+        <span class="brand-mark" aria-hidden="true">F<span>∙</span></span>
+        <span><strong>FDE</strong><small>Industrial investigations</small></span>
+      </a>
+      <a class="nav-item wb-w1-link" href="/">ERP / MES case room <span aria-hidden="true">↗</span></a>
+      <div class="side-divider"></div>
+      <div class="wb-list-heading"><h2>Saved cases</h2><button id="wb-new" class="wb-icon-button" type="button" aria-label="Create investigation case" disabled>+</button></div>
+      <label class="wb-search-label" for="wb-search">Find a case</label>
+      <input id="wb-search" class="wb-search" type="search" autocomplete="off" maxlength="160" placeholder="Search case titles">
+      <p id="wb-list-status" class="wb-side-hint" role="status">Loading saved cases…</p>
+      <div id="wb-case-list" class="wb-case-list"></div>
+      <nav class="wb-pagination" aria-label="Saved case pages"><button id="wb-list-previous" type="button" disabled>Previous</button><button id="wb-list-next" type="button" disabled>Next</button></nav>
+      <div class="sidebar-spacer"></div>
+      <div class="side-footer"><span class="side-foot-dot" aria-hidden="true"></span><div><strong>Proposal and evidence workspace</strong><small>Source access stays with the host</small></div></div>
+    </aside>
+    <div class="content-shell">
+      <header class="topbar wb-topbar">
+        <div class="breadcrumbs"><span>Engineering</span><span class="crumb-sep">/</span><strong>Investigations</strong></div>
+        <p id="wb-session" class="muted-small">Checking application session…</p>
+      </header>
+      <main id="workbench-main" class="wb-main" tabindex="-1">
+        <div id="wb-notice" class="wb-notice" role="status" aria-live="polite" hidden></div>
+        <section id="wb-empty" class="wb-empty white-card" aria-labelledby="wb-empty-heading">
+          <p class="overline">INDUSTRIAL IMPROVEMENT</p>
+          <h1 id="wb-empty-heading">Start with the <em>right question.</em></h1>
+          <p>Define the engagement, choose an investigation, assess the evidence, and carry the proposal through to a control plan and worker outcomes.</p>
+          <button id="wb-empty-new" class="button button-primary" type="button" disabled>Create investigation case</button>
+          <p class="field-hint">A case can remain unresolved while required observations or responsible reviews are pending.</p>
+        </section>
+        <section id="wb-case" hidden aria-labelledby="wb-case-heading">
+          <header class="wb-case-header">
+            <div><p class="overline">ENGAGEMENT / INVESTIGATION / IMPROVEMENT</p><h1 id="wb-case-heading">New investigation</h1><p id="wb-case-meta" class="muted-small"></p></div>
+            <span id="wb-origin" class="tag tag-neutral">WORKING RECORD</span>
+          </header>
+          <div class="wb-command-bar">
+            <div class="inline-actions"><button id="wb-save" class="button button-primary" type="button" disabled>Save case</button><button id="wb-assess" class="button button-outline" type="button" disabled>Assess saved evidence</button><button id="wb-reload" class="button button-outline" type="button" disabled>Reload saved case</button></div>
+            <p id="wb-save-status" class="muted-small" role="status">No saved case selected</p>
+          </div>
+          <div id="wb-tabs" class="wb-tabs" role="tablist" aria-label="Investigation sections">
+            <button id="wb-tab-engagement" type="button" role="tab" aria-selected="true" aria-controls="wb-panel-engagement" data-wb-tab="engagement">Engagement</button>
+            <button id="wb-tab-investigation" type="button" role="tab" aria-selected="false" aria-controls="wb-panel-investigation" data-wb-tab="investigation" tabindex="-1">Investigation</button>
+            <button id="wb-tab-evidence" type="button" role="tab" aria-selected="false" aria-controls="wb-panel-evidence" data-wb-tab="evidence" tabindex="-1">Evidence &amp; assessment</button>
+            <button id="wb-tab-engineering" type="button" role="tab" aria-selected="false" aria-controls="wb-panel-engineering" data-wb-tab="engineering" tabindex="-1">Engineering</button>
+            <button id="wb-tab-improvement" type="button" role="tab" aria-selected="false" aria-controls="wb-panel-improvement" data-wb-tab="improvement" tabindex="-1">Improvement &amp; control</button>
+            <button id="wb-tab-workers" type="button" role="tab" aria-selected="false" aria-controls="wb-panel-workers" data-wb-tab="workers" tabindex="-1">Worker outcomes</button>
+            <button id="wb-tab-handoff" type="button" role="tab" aria-selected="false" aria-controls="wb-panel-handoff" data-wb-tab="handoff" tabindex="-1">Handoff &amp; history</button>
+          </div>
+          <section id="wb-panel-engagement" class="wb-panel" role="tabpanel" aria-labelledby="wb-tab-engagement"></section>
+          <section id="wb-panel-investigation" class="wb-panel" role="tabpanel" aria-labelledby="wb-tab-investigation" hidden></section>
+          <section id="wb-panel-evidence" class="wb-panel" role="tabpanel" aria-labelledby="wb-tab-evidence" hidden></section>
+          <section id="wb-panel-engineering" class="wb-panel" role="tabpanel" aria-labelledby="wb-tab-engineering" hidden></section>
+          <section id="wb-panel-improvement" class="wb-panel" role="tabpanel" aria-labelledby="wb-tab-improvement" hidden></section>
+          <section id="wb-panel-workers" class="wb-panel" role="tabpanel" aria-labelledby="wb-tab-workers" hidden></section>
+          <section id="wb-panel-handoff" class="wb-panel" role="tabpanel" aria-labelledby="wb-tab-handoff" hidden></section>
+        </section>
+        <footer class="footnote-bar"><span>FDE / industrial investigation workbench</span><span>Human decisions retain their evidence and limits</span></footer>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

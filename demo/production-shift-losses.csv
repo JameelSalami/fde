@@ -1,0 +1,13 @@
+period_id,line_id,loss_category,lost_units
+2026-11-10-S1,LINE-2,bearing_failure,62
+2026-11-10-S1,LINE-2,changeover,28
+2026-11-10-S1,LINE-2,rejects,10
+2026-11-10-S1,LINE-2,microstops,5
+2026-11-11-S1,LINE-2,bearing_failure,40
+2026-11-11-S1,LINE-2,changeover,50
+2026-11-11-S1,LINE-2,rejects,12
+2026-11-11-S1,LINE-2,microstops,6
+2026-11-12-S1,LINE-2,bearing_failure,20
+2026-11-12-S1,LINE-2,changeover,30
+2026-11-12-S1,LINE-2,rejects,15
+2026-11-12-S1,LINE-2,microstops,10

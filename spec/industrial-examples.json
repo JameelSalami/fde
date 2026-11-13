@@ -1,0 +1,2239 @@
+{
+  "schema": "fde.industrial-examples/v1",
+  "authority": "none",
+  "sourceClass": "synthetic",
+  "examples": [
+    {
+      "id": "triage-reporting-discrepancy",
+      "purpose": "Finite investigation prerequisites are explicitly supplied.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "triage",
+          "concern": "reporting-discrepancy",
+          "availableEvidence": [
+            "native-records",
+            "field-definitions",
+            "identity-binding",
+            "observation-window"
+          ],
+          "measurementReady": true,
+          "workerConcern": false
+        }
+      },
+      "expected": {
+        "classification": "investigation-ready",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "triage-pdm-bom",
+      "purpose": "Finite investigation prerequisites are explicitly supplied.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "triage",
+          "concern": "pdm-bom",
+          "availableEvidence": [
+            "part-identity",
+            "released-definition",
+            "effectivity",
+            "production-bom",
+            "point-of-use"
+          ],
+          "measurementReady": true,
+          "workerConcern": false
+        }
+      },
+      "expected": {
+        "classification": "investigation-ready",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "triage-flow-setup",
+      "purpose": "Finite investigation prerequisites are explicitly supplied.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "triage",
+          "concern": "flow-setup",
+          "availableEvidence": [
+            "process-boundary",
+            "time-observations",
+            "product-mix",
+            "worker-observation"
+          ],
+          "measurementReady": true,
+          "workerConcern": false
+        }
+      },
+      "expected": {
+        "classification": "investigation-ready",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "triage-quality-measurement",
+      "purpose": "Finite investigation prerequisites are explicitly supplied.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "triage",
+          "concern": "quality-measurement",
+          "availableEvidence": [
+            "requirement",
+            "measurement-method",
+            "inspection-observations",
+            "sampling-plan"
+          ],
+          "measurementReady": true,
+          "workerConcern": false
+        }
+      },
+      "expected": {
+        "classification": "investigation-ready",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "triage-tooling",
+      "purpose": "Finite investigation prerequisites are explicitly supplied.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "triage",
+          "concern": "tooling",
+          "availableEvidence": [
+            "requirement",
+            "design-reference",
+            "measurement",
+            "local-observation"
+          ],
+          "measurementReady": true,
+          "workerConcern": false
+        }
+      },
+      "expected": {
+        "classification": "investigation-ready",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "triage-layout",
+      "purpose": "Finite investigation prerequisites are explicitly supplied.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "triage",
+          "concern": "layout",
+          "availableEvidence": [
+            "layout-reference",
+            "dimensions",
+            "movement-observations",
+            "worker-observation"
+          ],
+          "measurementReady": true,
+          "workerConcern": false
+        }
+      },
+      "expected": {
+        "classification": "investigation-ready",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "triage-maintenance",
+      "purpose": "Finite investigation prerequisites are explicitly supplied.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "triage",
+          "concern": "maintenance",
+          "availableEvidence": [
+            "asset-identity",
+            "failure-history",
+            "maintenance-records",
+            "worker-observation"
+          ],
+          "measurementReady": true,
+          "workerConcern": false
+        }
+      },
+      "expected": {
+        "classification": "investigation-ready",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "triage-reporting-signage",
+      "purpose": "Finite investigation prerequisites are explicitly supplied.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "triage",
+          "concern": "reporting-signage",
+          "availableEvidence": [
+            "decision-owner",
+            "metric-definition",
+            "source-lineage",
+            "freshness-requirement"
+          ],
+          "measurementReady": true,
+          "workerConcern": false
+        }
+      },
+      "expected": {
+        "classification": "investigation-ready",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "triage-missing-measurement",
+      "purpose": "A flow concern without suitable measures routes to measurement first.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "triage",
+          "concern": "flow-setup",
+          "availableEvidence": [],
+          "measurementReady": false,
+          "workerConcern": true
+        }
+      },
+      "expected": {
+        "classification": "measurement-first",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "pdm-applicable",
+      "purpose": "The explicit applicable definition and bounded BOM quantity agree.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "pdm",
+          "partId": "P-17",
+          "configuration": "plant-A/variant-red",
+          "requiredRevision": "B",
+          "observedRevision": "B",
+          "identity": "confirmed",
+          "release": "released",
+          "effectivity": "applicable",
+          "approvedAlternate": false,
+          "changeApproved": false,
+          "changePropagated": null,
+          "engineeringQuantity": "3.125",
+          "manufacturingQuantity": "3.125000",
+          "engineeringUnit": "piece",
+          "manufacturingUnit": "piece",
+          "evidenceRefs": [
+            "e-pdm"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "applicable-definition-consistent",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "pdm-older-applicable",
+      "purpose": "An explicitly applicable older revision remains valid without selecting latest.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "pdm",
+          "partId": "P-17",
+          "configuration": "plant-A/variant-red",
+          "requiredRevision": "A",
+          "observedRevision": "A",
+          "identity": "confirmed",
+          "release": "released",
+          "effectivity": "applicable",
+          "approvedAlternate": false,
+          "changeApproved": false,
+          "changePropagated": null,
+          "engineeringQuantity": "3.125",
+          "manufacturingQuantity": "3.125000",
+          "engineeringUnit": "piece",
+          "manufacturingUnit": "piece",
+          "evidenceRefs": [
+            "e-pdm"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "applicable-definition-consistent",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "pdm-approved-alternate",
+      "purpose": "A recorded approved alternate is distinguished from a revision mismatch.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "pdm",
+          "partId": "P-17",
+          "configuration": "plant-A/variant-red",
+          "requiredRevision": "B",
+          "observedRevision": "ALT",
+          "identity": "confirmed",
+          "release": "released",
+          "effectivity": "applicable",
+          "approvedAlternate": true,
+          "changeApproved": false,
+          "changePropagated": null,
+          "engineeringQuantity": "3.125",
+          "manufacturingQuantity": "3.125000",
+          "engineeringUnit": "piece",
+          "manufacturingUnit": "piece",
+          "evidenceRefs": [
+            "e-pdm"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "approved-alternate-recorded",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "pdm-change-not-propagated",
+      "purpose": "An approved change does not prove downstream propagation.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "pdm",
+          "partId": "P-17",
+          "configuration": "plant-A/variant-red",
+          "requiredRevision": "B",
+          "observedRevision": "B",
+          "identity": "confirmed",
+          "release": "released",
+          "effectivity": "applicable",
+          "approvedAlternate": false,
+          "changeApproved": true,
+          "changePropagated": false,
+          "engineeringQuantity": "3.125",
+          "manufacturingQuantity": "3.125000",
+          "engineeringUnit": "piece",
+          "manufacturingUnit": "piece",
+          "evidenceRefs": [
+            "e-pdm"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "change-not-propagated",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "pdm-change-propagation-unknown",
+      "purpose": "Missing downstream propagation remains unresolved.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "pdm",
+          "partId": "P-17",
+          "configuration": "plant-A/variant-red",
+          "requiredRevision": "B",
+          "observedRevision": "B",
+          "identity": "confirmed",
+          "release": "released",
+          "effectivity": "applicable",
+          "approvedAlternate": false,
+          "changeApproved": true,
+          "changePropagated": null,
+          "engineeringQuantity": "3.125",
+          "manufacturingQuantity": "3.125000",
+          "engineeringUnit": "piece",
+          "manufacturingUnit": "piece",
+          "evidenceRefs": [
+            "e-pdm"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "change-propagation-unresolved",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "pdm-missing-effectivity",
+      "purpose": "Equal revision names do not supply missing effectivity.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "pdm",
+          "partId": "P-17",
+          "configuration": "plant-A/variant-red",
+          "requiredRevision": "B",
+          "observedRevision": "B",
+          "identity": "confirmed",
+          "release": "released",
+          "effectivity": "unknown",
+          "approvedAlternate": false,
+          "changeApproved": false,
+          "changePropagated": null,
+          "engineeringQuantity": "3.125",
+          "manufacturingQuantity": "3.125000",
+          "engineeringUnit": "piece",
+          "manufacturingUnit": "piece",
+          "evidenceRefs": [
+            "e-pdm"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "effectivity-unresolved",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "pdm-identity-conflict",
+      "purpose": "Conflicting identity cannot become an aligned product definition.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "pdm",
+          "partId": "P-17",
+          "configuration": "plant-A/variant-red",
+          "requiredRevision": "B",
+          "observedRevision": "B",
+          "identity": "conflicting",
+          "release": "released",
+          "effectivity": "applicable",
+          "approvedAlternate": false,
+          "changeApproved": false,
+          "changePropagated": null,
+          "engineeringQuantity": "3.125",
+          "manufacturingQuantity": "3.125000",
+          "engineeringUnit": "piece",
+          "manufacturingUnit": "piece",
+          "evidenceRefs": [
+            "e-pdm"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "conflicting-identity",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "pdm-obsolete-copy",
+      "purpose": "A point-of-use revision differs from the explicit applicable revision.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "pdm",
+          "partId": "P-17",
+          "configuration": "plant-A/variant-red",
+          "requiredRevision": "B",
+          "observedRevision": "A",
+          "identity": "confirmed",
+          "release": "released",
+          "effectivity": "applicable",
+          "approvedAlternate": false,
+          "changeApproved": false,
+          "changePropagated": null,
+          "engineeringQuantity": "3.125",
+          "manufacturingQuantity": "3.125000",
+          "engineeringUnit": "piece",
+          "manufacturingUnit": "piece",
+          "evidenceRefs": [
+            "e-pdm"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "revision-mismatch",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "pdm-bom-mismatch",
+      "purpose": "5.875 minus 3.125 equals exactly 2.75 pieces.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "pdm",
+          "partId": "P-17",
+          "configuration": "plant-A/variant-red",
+          "requiredRevision": "B",
+          "observedRevision": "B",
+          "identity": "confirmed",
+          "release": "released",
+          "effectivity": "applicable",
+          "approvedAlternate": false,
+          "changeApproved": false,
+          "changePropagated": null,
+          "engineeringQuantity": "3.125",
+          "manufacturingQuantity": "5.875",
+          "engineeringUnit": "piece",
+          "manufacturingUnit": "piece",
+          "evidenceRefs": [
+            "e-pdm"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "bom-quantity-mismatch",
+        "metrics": {
+          "manufacturing-minus-engineering-quantity": {
+            "numerator": "11",
+            "denominator": "4",
+            "unit": "piece"
+          }
+        }
+      }
+    },
+    {
+      "id": "pdm-incomplete",
+      "purpose": "Missing evidence references cannot become an evidenced definition.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "pdm",
+          "partId": "P-17",
+          "configuration": "plant-A/variant-red",
+          "requiredRevision": "B",
+          "observedRevision": "B",
+          "identity": "confirmed",
+          "release": "released",
+          "effectivity": "applicable",
+          "approvedAlternate": false,
+          "changeApproved": false,
+          "changePropagated": null,
+          "engineeringQuantity": "3.125",
+          "manufacturingQuantity": "3.125000",
+          "engineeringUnit": "piece",
+          "manufacturingUnit": "piece",
+          "evidenceRefs": []
+        }
+      },
+      "expected": {
+        "classification": "evidence-incomplete",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "process-exact-time",
+      "purpose": "Mean 90 seconds before and 60 seconds after; no causal claim.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "process",
+          "measure": "cycle",
+          "baseline": {
+            "samples": [
+              "60",
+              "120"
+            ],
+            "unit": "s",
+            "population": "part-P17/shift-1",
+            "method": "stopwatch-v2",
+            "basis": "operator-observation",
+            "conditions": "same-tool-and-staffing",
+            "window": "baseline-2026-09",
+            "measurementQuality": "adequate"
+          },
+          "followup": {
+            "samples": [
+              "1",
+              "1"
+            ],
+            "unit": "min",
+            "population": "part-P17/shift-1",
+            "method": "stopwatch-v2",
+            "basis": "operator-observation",
+            "conditions": "same-tool-and-staffing",
+            "window": "followup-2026-10",
+            "measurementQuality": "adequate"
+          },
+          "evidenceRefs": [
+            "e-time"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "descriptive-comparison",
+        "metrics": {
+          "baseline-mean": {
+            "numerator": "90",
+            "denominator": "1",
+            "unit": "s"
+          },
+          "followup-mean": {
+            "numerator": "60",
+            "denominator": "1",
+            "unit": "s"
+          },
+          "baseline-minus-followup": {
+            "numerator": "30",
+            "denominator": "1",
+            "unit": "s"
+          },
+          "relative-reduction-percent": {
+            "numerator": "100",
+            "denominator": "3",
+            "unit": "percent"
+          }
+        }
+      }
+    },
+    {
+      "id": "process-order-not-cycle",
+      "purpose": "Order elapsed duration is not operator cycle time.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "process",
+          "measure": "cycle",
+          "baseline": {
+            "samples": [
+              "60",
+              "120"
+            ],
+            "unit": "s",
+            "population": "part-P17/shift-1",
+            "method": "stopwatch-v2",
+            "basis": "order-elapsed",
+            "conditions": "same-tool-and-staffing",
+            "window": "baseline-2026-09",
+            "measurementQuality": "adequate"
+          },
+          "followup": {
+            "samples": [
+              "1",
+              "1"
+            ],
+            "unit": "min",
+            "population": "part-P17/shift-1",
+            "method": "stopwatch-v2",
+            "basis": "operator-observation",
+            "conditions": "same-tool-and-staffing",
+            "window": "followup-2026-10",
+            "measurementQuality": "adequate"
+          },
+          "evidenceRefs": [
+            "e-time"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "measurement-basis-invalid",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "process-different-populations",
+      "purpose": "Changing product mix prevents an unqualified before/after comparison.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "process",
+          "measure": "cycle",
+          "baseline": {
+            "samples": [
+              "60",
+              "120"
+            ],
+            "unit": "s",
+            "population": "part-P17/shift-1",
+            "method": "stopwatch-v2",
+            "basis": "operator-observation",
+            "conditions": "same-tool-and-staffing",
+            "window": "baseline-2026-09",
+            "measurementQuality": "adequate"
+          },
+          "followup": {
+            "samples": [
+              "1",
+              "1"
+            ],
+            "unit": "min",
+            "population": "different-product-mix",
+            "method": "stopwatch-v2",
+            "basis": "operator-observation",
+            "conditions": "same-tool-and-staffing",
+            "window": "followup-2026-10",
+            "measurementQuality": "adequate"
+          },
+          "evidenceRefs": [
+            "e-time"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "comparison-not-established",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "process-measurement-unknown",
+      "purpose": "Unknown measurement suitability stays unresolved.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "process",
+          "measure": "cycle",
+          "baseline": {
+            "samples": [
+              "60",
+              "120"
+            ],
+            "unit": "s",
+            "population": "part-P17/shift-1",
+            "method": "stopwatch-v2",
+            "basis": "operator-observation",
+            "conditions": "same-tool-and-staffing",
+            "window": "baseline-2026-09",
+            "measurementQuality": "unknown"
+          },
+          "followup": {
+            "samples": [
+              "1",
+              "1"
+            ],
+            "unit": "min",
+            "population": "part-P17/shift-1",
+            "method": "stopwatch-v2",
+            "basis": "operator-observation",
+            "conditions": "same-tool-and-staffing",
+            "window": "followup-2026-10",
+            "measurementQuality": "adequate"
+          },
+          "evidenceRefs": [
+            "e-time"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "measurement-quality-unresolved",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "quality-descriptive-rate",
+      "purpose": "The average reported defect percentage changes from 3 to 1.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "process",
+          "measure": "defect-rate",
+          "baseline": {
+            "samples": [
+              "2",
+              "4"
+            ],
+            "unit": "percent",
+            "population": "part-P17/shift-1",
+            "method": "stopwatch-v2",
+            "basis": "inspection",
+            "conditions": "same-tool-and-staffing",
+            "window": "baseline-2026-09",
+            "measurementQuality": "adequate"
+          },
+          "followup": {
+            "samples": [
+              "1",
+              "1"
+            ],
+            "unit": "percent",
+            "population": "part-P17/shift-1",
+            "method": "stopwatch-v2",
+            "basis": "inspection",
+            "conditions": "same-tool-and-staffing",
+            "window": "followup-2026-10",
+            "measurementQuality": "adequate"
+          },
+          "evidenceRefs": [
+            "inspection-batch"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "descriptive-comparison",
+        "metrics": {
+          "baseline-minus-followup": {
+            "numerator": "2",
+            "denominator": "1",
+            "unit": "percent"
+          }
+        }
+      }
+    },
+    {
+      "id": "mechanical-recorded-acceptance",
+      "purpose": "A review record can be complete while software certification stays false.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "mechanical",
+          "mode": "tooling",
+          "requirements": [
+            "req"
+          ],
+          "designs": [
+            "drawing-r2"
+          ],
+          "measurements": [
+            "inspection"
+          ],
+          "localObservations": [
+            "site-check"
+          ],
+          "reviewer": "quality-owner",
+          "acceptance": "accepted",
+          "acceptanceEvidence": [
+            "signed-review"
+          ],
+          "evidenceRefs": [
+            "req",
+            "drawing-r2",
+            "inspection",
+            "site-check",
+            "signed-review"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "acceptance-recorded",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "mechanical-local-pending",
+      "purpose": "Remote design evidence cannot substitute for local observations.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "mechanical",
+          "mode": "tooling",
+          "requirements": [
+            "req"
+          ],
+          "designs": [
+            "drawing-r2"
+          ],
+          "measurements": [
+            "inspection"
+          ],
+          "localObservations": [],
+          "reviewer": "quality-owner",
+          "acceptance": "accepted",
+          "acceptanceEvidence": [
+            "signed-review"
+          ],
+          "evidenceRefs": [
+            "req",
+            "drawing-r2",
+            "inspection",
+            "site-check",
+            "signed-review"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "local-verification-pending",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "layout-review-pending",
+      "purpose": "Layout packet retains pending responsible review.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "mechanical",
+          "mode": "layout",
+          "requirements": [
+            "req"
+          ],
+          "designs": [
+            "drawing-r2"
+          ],
+          "measurements": [
+            "inspection"
+          ],
+          "localObservations": [
+            "site-check"
+          ],
+          "reviewer": null,
+          "acceptance": "pending",
+          "acceptanceEvidence": [],
+          "evidenceRefs": [
+            "req",
+            "drawing-r2",
+            "inspection",
+            "site-check",
+            "signed-review"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "review-pending",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "worker-delivery-recorded",
+      "purpose": "100 minus 20 costs gives 80; 25 percent allocates 20; evidence records 20 delivered.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "worker-benefit",
+          "currency": "USD",
+          "cashItems": [
+            {
+              "id": "cash-material",
+              "amount": "100.00",
+              "evidenceRef": "basis:cash-material"
+            }
+          ],
+          "costItems": [
+            {
+              "id": "cost-fixture",
+              "amount": "20",
+              "evidenceRef": "basis:cost-fixture"
+            }
+          ],
+          "cashScope": "nonoverlapping",
+          "releasedHours": "12.5",
+          "nonfinancialOutcome": "Less repetitive handling",
+          "observation": "observed",
+          "allocationPercent": "25",
+          "commitment": "authorized",
+          "deliveredAmount": "20",
+          "deliveryEvidence": [
+            "pay-record"
+          ],
+          "evidenceRefs": [
+            "observation",
+            "pay-record",
+            "basis:cash-material",
+            "basis:cost-fixture"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "delivery-evidence-recorded",
+        "metrics": {
+          "net-observed-cash": {
+            "numerator": "80",
+            "denominator": "1",
+            "unit": "USD"
+          },
+          "authorized-allocation": {
+            "numerator": "20",
+            "denominator": "1",
+            "unit": "USD"
+          },
+          "released-capacity": {
+            "numerator": "25",
+            "denominator": "2",
+            "unit": "h"
+          },
+          "recorded-delivery": {
+            "numerator": "20",
+            "denominator": "1",
+            "unit": "USD"
+          }
+        }
+      }
+    },
+    {
+      "id": "worker-no-commitment",
+      "purpose": "An observed nonfinancial improvement does not imply financial sharing.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "worker-benefit",
+          "currency": "USD",
+          "cashItems": [
+            {
+              "id": "cash-material",
+              "amount": "100.00",
+              "evidenceRef": "basis:cash-material"
+            }
+          ],
+          "costItems": [
+            {
+              "id": "cost-fixture",
+              "amount": "20",
+              "evidenceRef": "basis:cost-fixture"
+            }
+          ],
+          "cashScope": "nonoverlapping",
+          "releasedHours": "12.5",
+          "nonfinancialOutcome": "Less repetitive handling",
+          "observation": "observed",
+          "allocationPercent": null,
+          "commitment": "uncommitted",
+          "deliveredAmount": null,
+          "deliveryEvidence": [],
+          "evidenceRefs": [
+            "observation",
+            "pay-record",
+            "basis:cash-material",
+            "basis:cost-fixture"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "financial-distribution-uncommitted",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "worker-promise-undelivered",
+      "purpose": "A calculated authorized allocation is distinct from verified delivery.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "worker-benefit",
+          "currency": "USD",
+          "cashItems": [
+            {
+              "id": "cash-material",
+              "amount": "100.00",
+              "evidenceRef": "basis:cash-material"
+            }
+          ],
+          "costItems": [
+            {
+              "id": "cost-fixture",
+              "amount": "20",
+              "evidenceRef": "basis:cost-fixture"
+            }
+          ],
+          "cashScope": "nonoverlapping",
+          "releasedHours": "12.5",
+          "nonfinancialOutcome": "Less repetitive handling",
+          "observation": "observed",
+          "allocationPercent": "25",
+          "commitment": "authorized",
+          "deliveredAmount": null,
+          "deliveryEvidence": [],
+          "evidenceRefs": [
+            "observation",
+            "pay-record",
+            "basis:cash-material",
+            "basis:cost-fixture"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "delivery-unverified",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "worker-delivery-partial",
+      "purpose": "Five delivered against twenty allocated leaves fifteen outstanding.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "worker-benefit",
+          "currency": "USD",
+          "cashItems": [
+            {
+              "id": "cash-material",
+              "amount": "100.00",
+              "evidenceRef": "basis:cash-material"
+            }
+          ],
+          "costItems": [
+            {
+              "id": "cost-fixture",
+              "amount": "20",
+              "evidenceRef": "basis:cost-fixture"
+            }
+          ],
+          "cashScope": "nonoverlapping",
+          "releasedHours": "12.5",
+          "nonfinancialOutcome": "Less repetitive handling",
+          "observation": "observed",
+          "allocationPercent": "25",
+          "commitment": "authorized",
+          "deliveredAmount": "5",
+          "deliveryEvidence": [
+            "pay-record"
+          ],
+          "evidenceRefs": [
+            "observation",
+            "pay-record",
+            "basis:cash-material",
+            "basis:cost-fixture"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "delivery-partial",
+        "metrics": {
+          "remaining-allocation": {
+            "numerator": "15",
+            "denominator": "1",
+            "unit": "USD"
+          }
+        }
+      }
+    },
+    {
+      "id": "worker-capacity-not-cash",
+      "purpose": "Released hours are retained without creating cash savings.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "worker-benefit",
+          "currency": "USD",
+          "cashItems": [],
+          "costItems": [],
+          "cashScope": "nonoverlapping",
+          "releasedHours": "12.5",
+          "nonfinancialOutcome": "Less repetitive handling",
+          "observation": "observed",
+          "allocationPercent": null,
+          "commitment": "uncommitted",
+          "deliveredAmount": null,
+          "deliveryEvidence": [],
+          "evidenceRefs": [
+            "observation",
+            "pay-record"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "financial-distribution-uncommitted",
+        "metrics": {
+          "released-capacity": {
+            "numerator": "25",
+            "denominator": "2",
+            "unit": "h"
+          }
+        }
+      }
+    },
+    {
+      "id": "worker-unobserved",
+      "purpose": "Proposed benefits are not observed results.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "worker-benefit",
+          "currency": "USD",
+          "cashItems": [
+            {
+              "id": "cash-material",
+              "amount": "100.00",
+              "evidenceRef": "basis:cash-material"
+            }
+          ],
+          "costItems": [
+            {
+              "id": "cost-fixture",
+              "amount": "20",
+              "evidenceRef": "basis:cost-fixture"
+            }
+          ],
+          "cashScope": "nonoverlapping",
+          "releasedHours": "12.5",
+          "nonfinancialOutcome": "Less repetitive handling",
+          "observation": "unobserved",
+          "allocationPercent": "25",
+          "commitment": "authorized",
+          "deliveredAmount": "20",
+          "deliveryEvidence": [
+            "pay-record"
+          ],
+          "evidenceRefs": [
+            "observation",
+            "pay-record",
+            "basis:cash-material",
+            "basis:cost-fixture"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "outcome-unobserved",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "worker-disputed",
+      "purpose": "Disputed outcomes remain visible instead of being counted as verified savings.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "worker-benefit",
+          "currency": "USD",
+          "cashItems": [
+            {
+              "id": "cash-material",
+              "amount": "100.00",
+              "evidenceRef": "basis:cash-material"
+            }
+          ],
+          "costItems": [
+            {
+              "id": "cost-fixture",
+              "amount": "20",
+              "evidenceRef": "basis:cost-fixture"
+            }
+          ],
+          "cashScope": "nonoverlapping",
+          "releasedHours": "12.5",
+          "nonfinancialOutcome": "Less repetitive handling",
+          "observation": "disputed",
+          "allocationPercent": "25",
+          "commitment": "authorized",
+          "deliveredAmount": "20",
+          "deliveryEvidence": [
+            "pay-record"
+          ],
+          "evidenceRefs": [
+            "observation",
+            "pay-record",
+            "basis:cash-material",
+            "basis:cost-fixture"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "outcome-disputed",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "bom-consistent",
+      "purpose": "Two explicit BOM positions agree within the supplied assembly context.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "bom",
+          "assemblyId": "ASSEMBLY-1",
+          "configuration": "plant-A",
+          "requiredRevision": "R1",
+          "observedRevision": "R1",
+          "release": "released",
+          "effectivity": "applicable",
+          "engineeringLines": [
+            {
+              "position": "10",
+              "partId": "P-1",
+              "revision": "A",
+              "quantity": "2",
+              "unit": "piece",
+              "evidenceRef": "ebom"
+            },
+            {
+              "position": "20",
+              "partId": "P-2",
+              "revision": "B",
+              "quantity": "1",
+              "unit": "piece",
+              "evidenceRef": "ebom"
+            }
+          ],
+          "manufacturingLines": [
+            {
+              "position": "10",
+              "partId": "P-1",
+              "revision": "A",
+              "quantity": "2",
+              "unit": "piece",
+              "evidenceRef": "mbom"
+            },
+            {
+              "position": "20",
+              "partId": "P-2",
+              "revision": "B",
+              "quantity": "1",
+              "unit": "piece",
+              "evidenceRef": "mbom"
+            }
+          ],
+          "substitutions": [],
+          "selectedPart": null,
+          "selectedRevision": null,
+          "whereUsed": [],
+          "evidenceRefs": [
+            "ebom",
+            "mbom",
+            "approval",
+            "uses"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "bom-lines-consistent",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "bom-missing-position",
+      "purpose": "Manufacturing BOM omits engineering position10.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "bom",
+          "assemblyId": "ASSEMBLY-1",
+          "configuration": "plant-A",
+          "requiredRevision": "R1",
+          "observedRevision": "R1",
+          "release": "released",
+          "effectivity": "applicable",
+          "engineeringLines": [
+            {
+              "position": "10",
+              "partId": "P-1",
+              "revision": "A",
+              "quantity": "2",
+              "unit": "piece",
+              "evidenceRef": "ebom"
+            },
+            {
+              "position": "20",
+              "partId": "P-2",
+              "revision": "B",
+              "quantity": "1",
+              "unit": "piece",
+              "evidenceRef": "ebom"
+            }
+          ],
+          "manufacturingLines": [
+            {
+              "position": "20",
+              "partId": "P-2",
+              "revision": "B",
+              "quantity": "1",
+              "unit": "piece",
+              "evidenceRef": "mbom"
+            }
+          ],
+          "substitutions": [],
+          "selectedPart": null,
+          "selectedRevision": null,
+          "whereUsed": [],
+          "evidenceRefs": [
+            "ebom",
+            "mbom",
+            "approval",
+            "uses"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "bom-lines-differ",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "bom-extra-position",
+      "purpose": "Manufacturing BOM has an extra position30.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "bom",
+          "assemblyId": "ASSEMBLY-1",
+          "configuration": "plant-A",
+          "requiredRevision": "R1",
+          "observedRevision": "R1",
+          "release": "released",
+          "effectivity": "applicable",
+          "engineeringLines": [
+            {
+              "position": "10",
+              "partId": "P-1",
+              "revision": "A",
+              "quantity": "2",
+              "unit": "piece",
+              "evidenceRef": "ebom"
+            },
+            {
+              "position": "20",
+              "partId": "P-2",
+              "revision": "B",
+              "quantity": "1",
+              "unit": "piece",
+              "evidenceRef": "ebom"
+            }
+          ],
+          "manufacturingLines": [
+            {
+              "position": "10",
+              "partId": "P-1",
+              "revision": "A",
+              "quantity": "2",
+              "unit": "piece",
+              "evidenceRef": "mbom"
+            },
+            {
+              "position": "20",
+              "partId": "P-2",
+              "revision": "B",
+              "quantity": "1",
+              "unit": "piece",
+              "evidenceRef": "mbom"
+            },
+            {
+              "position": "30",
+              "partId": "EXTRA",
+              "revision": "A",
+              "quantity": "2",
+              "unit": "piece",
+              "evidenceRef": "mbom"
+            }
+          ],
+          "substitutions": [],
+          "selectedPart": null,
+          "selectedRevision": null,
+          "whereUsed": [],
+          "evidenceRefs": [
+            "ebom",
+            "mbom",
+            "approval",
+            "uses"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "bom-lines-differ",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "bom-quantity-mismatch",
+      "purpose": "3.125 manufacturing minus 2 engineering equals9/8 pieces.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "bom",
+          "assemblyId": "ASSEMBLY-1",
+          "configuration": "plant-A",
+          "requiredRevision": "R1",
+          "observedRevision": "R1",
+          "release": "released",
+          "effectivity": "applicable",
+          "engineeringLines": [
+            {
+              "position": "10",
+              "partId": "P-1",
+              "revision": "A",
+              "quantity": "2",
+              "unit": "piece",
+              "evidenceRef": "ebom"
+            },
+            {
+              "position": "20",
+              "partId": "P-2",
+              "revision": "B",
+              "quantity": "1",
+              "unit": "piece",
+              "evidenceRef": "ebom"
+            }
+          ],
+          "manufacturingLines": [
+            {
+              "position": "10",
+              "partId": "P-1",
+              "revision": "A",
+              "quantity": "3.125",
+              "unit": "piece",
+              "evidenceRef": "mbom"
+            },
+            {
+              "position": "20",
+              "partId": "P-2",
+              "revision": "B",
+              "quantity": "1",
+              "unit": "piece",
+              "evidenceRef": "mbom"
+            }
+          ],
+          "substitutions": [],
+          "selectedPart": null,
+          "selectedRevision": null,
+          "whereUsed": [],
+          "evidenceRefs": [
+            "ebom",
+            "mbom",
+            "approval",
+            "uses"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "bom-lines-differ",
+        "metrics": {
+          "quantity-delta:10": {
+            "numerator": "9",
+            "denominator": "8",
+            "unit": "piece"
+          }
+        }
+      }
+    },
+    {
+      "id": "bom-unapproved-part",
+      "purpose": "Different part identity at the same position needs explicit approval.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "bom",
+          "assemblyId": "ASSEMBLY-1",
+          "configuration": "plant-A",
+          "requiredRevision": "R1",
+          "observedRevision": "R1",
+          "release": "released",
+          "effectivity": "applicable",
+          "engineeringLines": [
+            {
+              "position": "10",
+              "partId": "P-1",
+              "revision": "A",
+              "quantity": "2",
+              "unit": "piece",
+              "evidenceRef": "ebom"
+            },
+            {
+              "position": "20",
+              "partId": "P-2",
+              "revision": "B",
+              "quantity": "1",
+              "unit": "piece",
+              "evidenceRef": "ebom"
+            }
+          ],
+          "manufacturingLines": [
+            {
+              "position": "10",
+              "partId": "OTHER",
+              "revision": "A",
+              "quantity": "2",
+              "unit": "piece",
+              "evidenceRef": "mbom"
+            },
+            {
+              "position": "20",
+              "partId": "P-2",
+              "revision": "B",
+              "quantity": "1",
+              "unit": "piece",
+              "evidenceRef": "mbom"
+            }
+          ],
+          "substitutions": [],
+          "selectedPart": null,
+          "selectedRevision": null,
+          "whereUsed": [],
+          "evidenceRefs": [
+            "ebom",
+            "mbom",
+            "approval",
+            "uses"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "bom-lines-differ",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "bom-revision-mismatch",
+      "purpose": "Same part with an unapproved different revision remains a discrepancy.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "bom",
+          "assemblyId": "ASSEMBLY-1",
+          "configuration": "plant-A",
+          "requiredRevision": "R1",
+          "observedRevision": "R1",
+          "release": "released",
+          "effectivity": "applicable",
+          "engineeringLines": [
+            {
+              "position": "10",
+              "partId": "P-1",
+              "revision": "A",
+              "quantity": "2",
+              "unit": "piece",
+              "evidenceRef": "ebom"
+            },
+            {
+              "position": "20",
+              "partId": "P-2",
+              "revision": "B",
+              "quantity": "1",
+              "unit": "piece",
+              "evidenceRef": "ebom"
+            }
+          ],
+          "manufacturingLines": [
+            {
+              "position": "10",
+              "partId": "P-1",
+              "revision": "B",
+              "quantity": "2",
+              "unit": "piece",
+              "evidenceRef": "mbom"
+            },
+            {
+              "position": "20",
+              "partId": "P-2",
+              "revision": "B",
+              "quantity": "1",
+              "unit": "piece",
+              "evidenceRef": "mbom"
+            }
+          ],
+          "substitutions": [],
+          "selectedPart": null,
+          "selectedRevision": null,
+          "whereUsed": [],
+          "evidenceRefs": [
+            "ebom",
+            "mbom",
+            "approval",
+            "uses"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "bom-lines-differ",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "bom-approved-substitution",
+      "purpose": "An explicit2-for-1 approved revision-specific substitution requires4 actual units.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "bom",
+          "assemblyId": "ASSEMBLY-1",
+          "configuration": "plant-A",
+          "requiredRevision": "R1",
+          "observedRevision": "R1",
+          "release": "released",
+          "effectivity": "applicable",
+          "engineeringLines": [
+            {
+              "position": "10",
+              "partId": "P-1",
+              "revision": "A",
+              "quantity": "2",
+              "unit": "piece",
+              "evidenceRef": "ebom"
+            },
+            {
+              "position": "20",
+              "partId": "P-2",
+              "revision": "B",
+              "quantity": "1",
+              "unit": "piece",
+              "evidenceRef": "ebom"
+            }
+          ],
+          "manufacturingLines": [
+            {
+              "position": "10",
+              "partId": "P-ALT",
+              "revision": "Z",
+              "quantity": "4",
+              "unit": "piece",
+              "evidenceRef": "mbom"
+            },
+            {
+              "position": "20",
+              "partId": "P-2",
+              "revision": "B",
+              "quantity": "1",
+              "unit": "piece",
+              "evidenceRef": "mbom"
+            }
+          ],
+          "substitutions": [
+            {
+              "position": "10",
+              "requiredPartId": "P-1",
+              "requiredRevision": "A",
+              "actualPartId": "P-ALT",
+              "actualRevision": "Z",
+              "quantityFactor": "2",
+              "approvalRef": "approval"
+            }
+          ],
+          "selectedPart": null,
+          "selectedRevision": null,
+          "whereUsed": [],
+          "evidenceRefs": [
+            "ebom",
+            "mbom",
+            "approval",
+            "uses"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "bom-lines-consistent",
+        "metrics": {
+          "quantity-delta:10": {
+            "numerator": "0",
+            "denominator": "1",
+            "unit": "piece"
+          }
+        }
+      }
+    },
+    {
+      "id": "bom-unit-mismatch",
+      "purpose": "No silent piece-to-box mapping is allowed.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "bom",
+          "assemblyId": "ASSEMBLY-1",
+          "configuration": "plant-A",
+          "requiredRevision": "R1",
+          "observedRevision": "R1",
+          "release": "released",
+          "effectivity": "applicable",
+          "engineeringLines": [
+            {
+              "position": "10",
+              "partId": "P-1",
+              "revision": "A",
+              "quantity": "2",
+              "unit": "piece",
+              "evidenceRef": "ebom"
+            },
+            {
+              "position": "20",
+              "partId": "P-2",
+              "revision": "B",
+              "quantity": "1",
+              "unit": "piece",
+              "evidenceRef": "ebom"
+            }
+          ],
+          "manufacturingLines": [
+            {
+              "position": "10",
+              "partId": "P-1",
+              "revision": "A",
+              "quantity": "2",
+              "unit": "box",
+              "evidenceRef": "mbom"
+            },
+            {
+              "position": "20",
+              "partId": "P-2",
+              "revision": "B",
+              "quantity": "1",
+              "unit": "piece",
+              "evidenceRef": "mbom"
+            }
+          ],
+          "substitutions": [],
+          "selectedPart": null,
+          "selectedRevision": null,
+          "whereUsed": [],
+          "evidenceRefs": [
+            "ebom",
+            "mbom",
+            "approval",
+            "uses"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "bom-comparison-unresolved",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "bom-effectivity-missing",
+      "purpose": "Matching line arrays do not establish assembly applicability.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "bom",
+          "assemblyId": "ASSEMBLY-1",
+          "configuration": "plant-A",
+          "requiredRevision": "R1",
+          "observedRevision": "R1",
+          "release": "released",
+          "effectivity": "unknown",
+          "engineeringLines": [
+            {
+              "position": "10",
+              "partId": "P-1",
+              "revision": "A",
+              "quantity": "2",
+              "unit": "piece",
+              "evidenceRef": "ebom"
+            },
+            {
+              "position": "20",
+              "partId": "P-2",
+              "revision": "B",
+              "quantity": "1",
+              "unit": "piece",
+              "evidenceRef": "ebom"
+            }
+          ],
+          "manufacturingLines": [
+            {
+              "position": "10",
+              "partId": "P-1",
+              "revision": "A",
+              "quantity": "2",
+              "unit": "piece",
+              "evidenceRef": "mbom"
+            },
+            {
+              "position": "20",
+              "partId": "P-2",
+              "revision": "B",
+              "quantity": "1",
+              "unit": "piece",
+              "evidenceRef": "mbom"
+            }
+          ],
+          "substitutions": [],
+          "selectedPart": null,
+          "selectedRevision": null,
+          "whereUsed": [],
+          "evidenceRefs": [
+            "ebom",
+            "mbom",
+            "approval",
+            "uses"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "bom-applicability-unresolved",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "bom-where-used",
+      "purpose": "Supplied P-1 revisionA has two distinct ancestor assembly revisions.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "bom",
+          "assemblyId": "ASSEMBLY-1",
+          "configuration": "plant-A",
+          "requiredRevision": "R1",
+          "observedRevision": "R1",
+          "release": "released",
+          "effectivity": "applicable",
+          "engineeringLines": [
+            {
+              "position": "10",
+              "partId": "P-1",
+              "revision": "A",
+              "quantity": "2",
+              "unit": "piece",
+              "evidenceRef": "ebom"
+            },
+            {
+              "position": "20",
+              "partId": "P-2",
+              "revision": "B",
+              "quantity": "1",
+              "unit": "piece",
+              "evidenceRef": "ebom"
+            }
+          ],
+          "manufacturingLines": [
+            {
+              "position": "10",
+              "partId": "P-1",
+              "revision": "A",
+              "quantity": "2",
+              "unit": "piece",
+              "evidenceRef": "mbom"
+            },
+            {
+              "position": "20",
+              "partId": "P-2",
+              "revision": "B",
+              "quantity": "1",
+              "unit": "piece",
+              "evidenceRef": "mbom"
+            }
+          ],
+          "substitutions": [],
+          "selectedPart": "P-1",
+          "selectedRevision": "A",
+          "whereUsed": [
+            {
+              "parentId": "SUB",
+              "parentRevision": "1",
+              "childId": "P-1",
+              "childRevision": "A",
+              "configuration": "plant-A",
+              "evidenceRef": "uses"
+            },
+            {
+              "parentId": "TOP",
+              "parentRevision": "2",
+              "childId": "SUB",
+              "childRevision": "1",
+              "configuration": "plant-A",
+              "evidenceRef": "uses"
+            }
+          ],
+          "evidenceRefs": [
+            "ebom",
+            "mbom",
+            "approval",
+            "uses"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "bom-lines-consistent",
+        "metrics": {
+          "supplied-where-used-ancestor-count": {
+            "numerator": "2",
+            "denominator": "1",
+            "unit": "assembly-revisions"
+          }
+        }
+      }
+    },
+    {
+      "id": "bom-where-used-other-config",
+      "purpose": "Relationships in another configuration do not count.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "bom",
+          "assemblyId": "ASSEMBLY-1",
+          "configuration": "other-plant",
+          "requiredRevision": "R1",
+          "observedRevision": "R1",
+          "release": "released",
+          "effectivity": "applicable",
+          "engineeringLines": [
+            {
+              "position": "10",
+              "partId": "P-1",
+              "revision": "A",
+              "quantity": "2",
+              "unit": "piece",
+              "evidenceRef": "ebom"
+            },
+            {
+              "position": "20",
+              "partId": "P-2",
+              "revision": "B",
+              "quantity": "1",
+              "unit": "piece",
+              "evidenceRef": "ebom"
+            }
+          ],
+          "manufacturingLines": [
+            {
+              "position": "10",
+              "partId": "P-1",
+              "revision": "A",
+              "quantity": "2",
+              "unit": "piece",
+              "evidenceRef": "mbom"
+            },
+            {
+              "position": "20",
+              "partId": "P-2",
+              "revision": "B",
+              "quantity": "1",
+              "unit": "piece",
+              "evidenceRef": "mbom"
+            }
+          ],
+          "substitutions": [],
+          "selectedPart": "P-1",
+          "selectedRevision": "A",
+          "whereUsed": [
+            {
+              "parentId": "SUB",
+              "parentRevision": "1",
+              "childId": "P-1",
+              "childRevision": "A",
+              "configuration": "plant-A",
+              "evidenceRef": "uses"
+            },
+            {
+              "parentId": "TOP",
+              "parentRevision": "2",
+              "childId": "SUB",
+              "childRevision": "1",
+              "configuration": "plant-A",
+              "evidenceRef": "uses"
+            }
+          ],
+          "evidenceRefs": [
+            "ebom",
+            "mbom",
+            "approval",
+            "uses"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "bom-lines-consistent",
+        "metrics": {
+          "supplied-where-used-ancestor-count": {
+            "numerator": "0",
+            "denominator": "1",
+            "unit": "assembly-revisions"
+          }
+        }
+      }
+    },
+    {
+      "id": "bom-where-used-cycle",
+      "purpose": "A supplied revision-specific cycle is detected and traversal terminates.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "bom",
+          "assemblyId": "ASSEMBLY-1",
+          "configuration": "plant-A",
+          "requiredRevision": "R1",
+          "observedRevision": "R1",
+          "release": "released",
+          "effectivity": "applicable",
+          "engineeringLines": [
+            {
+              "position": "10",
+              "partId": "P-1",
+              "revision": "A",
+              "quantity": "2",
+              "unit": "piece",
+              "evidenceRef": "ebom"
+            },
+            {
+              "position": "20",
+              "partId": "P-2",
+              "revision": "B",
+              "quantity": "1",
+              "unit": "piece",
+              "evidenceRef": "ebom"
+            }
+          ],
+          "manufacturingLines": [
+            {
+              "position": "10",
+              "partId": "P-1",
+              "revision": "A",
+              "quantity": "2",
+              "unit": "piece",
+              "evidenceRef": "mbom"
+            },
+            {
+              "position": "20",
+              "partId": "P-2",
+              "revision": "B",
+              "quantity": "1",
+              "unit": "piece",
+              "evidenceRef": "mbom"
+            }
+          ],
+          "substitutions": [],
+          "selectedPart": "P-1",
+          "selectedRevision": "A",
+          "whereUsed": [
+            {
+              "parentId": "SUB",
+              "parentRevision": "1",
+              "childId": "P-1",
+              "childRevision": "A",
+              "configuration": "plant-A",
+              "evidenceRef": "uses"
+            },
+            {
+              "parentId": "P-1",
+              "parentRevision": "A",
+              "childId": "SUB",
+              "childRevision": "1",
+              "configuration": "plant-A",
+              "evidenceRef": "uses"
+            }
+          ],
+          "evidenceRefs": [
+            "ebom",
+            "mbom",
+            "approval",
+            "uses"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "where-used-cycle",
+        "metrics": {}
+      }
+    },
+    {
+      "id": "bom-diamond-no-cycle",
+      "purpose": "A shared ancestor is counted once without being misclassified as a cycle.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "bom",
+          "assemblyId": "ASSEMBLY-1",
+          "configuration": "plant-A",
+          "requiredRevision": "R1",
+          "observedRevision": "R1",
+          "release": "released",
+          "effectivity": "applicable",
+          "engineeringLines": [
+            {
+              "position": "10",
+              "partId": "P-1",
+              "revision": "A",
+              "quantity": "2",
+              "unit": "piece",
+              "evidenceRef": "ebom"
+            },
+            {
+              "position": "20",
+              "partId": "P-2",
+              "revision": "B",
+              "quantity": "1",
+              "unit": "piece",
+              "evidenceRef": "ebom"
+            }
+          ],
+          "manufacturingLines": [
+            {
+              "position": "10",
+              "partId": "P-1",
+              "revision": "A",
+              "quantity": "2",
+              "unit": "piece",
+              "evidenceRef": "mbom"
+            },
+            {
+              "position": "20",
+              "partId": "P-2",
+              "revision": "B",
+              "quantity": "1",
+              "unit": "piece",
+              "evidenceRef": "mbom"
+            }
+          ],
+          "substitutions": [],
+          "selectedPart": "P-1",
+          "selectedRevision": "A",
+          "whereUsed": [
+            {
+              "parentId": "SUB",
+              "parentRevision": "1",
+              "childId": "P-1",
+              "childRevision": "A",
+              "configuration": "plant-A",
+              "evidenceRef": "uses"
+            },
+            {
+              "parentId": "TOP",
+              "parentRevision": "2",
+              "childId": "SUB",
+              "childRevision": "1",
+              "configuration": "plant-A",
+              "evidenceRef": "uses"
+            },
+            {
+              "parentId": "SUB-2",
+              "parentRevision": "1",
+              "childId": "P-1",
+              "childRevision": "A",
+              "configuration": "plant-A",
+              "evidenceRef": "uses"
+            },
+            {
+              "parentId": "TOP",
+              "parentRevision": "2",
+              "childId": "SUB-2",
+              "childRevision": "1",
+              "configuration": "plant-A",
+              "evidenceRef": "uses"
+            }
+          ],
+          "evidenceRefs": [
+            "ebom",
+            "mbom",
+            "approval",
+            "uses"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "bom-lines-consistent",
+        "metrics": {
+          "supplied-where-used-ancestor-count": {
+            "numerator": "3",
+            "denominator": "1",
+            "unit": "assembly-revisions"
+          }
+        }
+      }
+    },
+    {
+      "id": "worker-shared-basis",
+      "purpose": "Distinct cash/cost IDs do not establish separate attribution when they cite one basis item.",
+      "request": {
+        "schema": "fde.industrial-assessment-request/v1",
+        "investigation": {
+          "kind": "worker-benefit",
+          "currency": "USD",
+          "cashItems": [
+            {
+              "id": "cash-material",
+              "amount": "100.00",
+              "evidenceRef": "basis:cash-material"
+            }
+          ],
+          "costItems": [
+            {
+              "id": "cost-fixture",
+              "amount": "20",
+              "evidenceRef": "basis:cash-material"
+            }
+          ],
+          "cashScope": "nonoverlapping",
+          "releasedHours": "12.5",
+          "nonfinancialOutcome": "Less repetitive handling",
+          "observation": "observed",
+          "allocationPercent": "25",
+          "commitment": "authorized",
+          "deliveredAmount": "20",
+          "deliveryEvidence": [
+            "pay-record"
+          ],
+          "evidenceRefs": [
+            "observation",
+            "pay-record",
+            "basis:cash-material",
+            "basis:cost-fixture"
+          ]
+        }
+      },
+      "expected": {
+        "classification": "allocation-unresolved",
+        "metrics": {}
+      }
+    }
+  ]
+}
